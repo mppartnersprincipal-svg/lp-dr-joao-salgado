@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# material do cliente (o briefing contém credenciais em texto puro — nunca versionar)
+/Briefing/
+/Fotos/
+.env*
+!.env.example
