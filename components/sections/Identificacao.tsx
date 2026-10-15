@@ -8,7 +8,7 @@ const STAGGER_MS = 90;
 
 export function Identificacao() {
   return (
-    <section id="identificacao" aria-labelledby="identificacao-t" className="secao bg-creme text-tinta">
+    <section id="identificacao" aria-labelledby="identificacao-t" className="cv-auto secao bg-creme text-tinta">
       <div className="container-lp">
         <p className="eyebrow flex items-center gap-3 text-ouro-escuro">
           <span aria-hidden="true" className="h-px w-8 bg-current opacity-60" />

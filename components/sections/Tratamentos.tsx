@@ -25,7 +25,7 @@ const IMAGENS = {
 
 export function Tratamentos() {
   return (
-    <section id="tratamentos" aria-labelledby="tratamentos-t" className="secao">
+    <section id="tratamentos" aria-labelledby="tratamentos-t" className="cv-auto secao">
       <div className="container-lp">
         <SectionHeading id="tratamentos" eyebrow={TRATAMENTOS.eyebrow} title={TRATAMENTOS.title} />
 
@@ -47,7 +47,7 @@ export function Tratamentos() {
                           className={`h-full w-full object-cover ${img.position} transition-transform duration-[1.4s] ease-suave group-hover:scale-[1.06]`}
                         />
                         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-superficie via-transparent to-transparent" />
-                        <span className="absolute right-3 top-3 bg-fundo/70 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia backdrop-blur">
+                        <span className="absolute right-3 top-3 bg-fundo/80 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia">
                           {IMAGEM_ILUSTRATIVA}
                         </span>
                       </div>

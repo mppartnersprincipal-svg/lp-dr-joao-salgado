@@ -6,7 +6,7 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-t" className="secao bg-superficie">
+    <section id="faq" aria-labelledby="faq-t" className="cv-auto secao bg-superficie">
       <div className="container-lp grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">

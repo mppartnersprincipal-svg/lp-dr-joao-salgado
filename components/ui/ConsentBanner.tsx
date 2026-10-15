@@ -25,7 +25,7 @@ export function ConsentBanner() {
     <div
       role="region"
       aria-label="Preferências de cookies"
-      className="fixed inset-x-3 bottom-24 z-50 mx-auto max-w-xl border border-ouro/25 bg-superficie/95 p-5 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] backdrop-blur md:bottom-6 md:left-6 md:right-auto"
+      className="fixed inset-x-3 bottom-24 z-50 mx-auto max-w-xl border border-ouro/25 bg-superficie/95 p-5 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] md:bottom-6 md:left-6 md:right-auto"
     >
       <p className="text-sm leading-relaxed text-areia">
         Usamos cookies para entender como a página é usada e melhorar a sua experiência. Saiba mais na{' '}

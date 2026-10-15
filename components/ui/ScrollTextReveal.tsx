@@ -26,7 +26,9 @@ export function ScrollTextReveal({ text, className = '', highlight = [] }: Scrol
   const isHighlight = (w: string) => highlight.some((h) => w.toLowerCase().startsWith(h.toLowerCase()));
 
   return (
-    <p ref={ref} data-scroll-reveal="" className={className} aria-label={text}>
+    <p ref={ref} data-scroll-reveal="" className={className}>
+      {/* texto inteiro para leitores de tela; as palavras animadas ficam ocultas para eles */}
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <span
           key={`${word}-${i}`}

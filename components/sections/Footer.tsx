@@ -5,7 +5,7 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export function Footer() {
   return (
-    <footer className="footer border-t border-ouro/15 bg-fundo pb-28 pt-14 md:pb-14">
+    <footer className="footer cv-auto border-t border-ouro/15 bg-fundo pb-28 pt-14 md:pb-14">
       <div className="container-lp grid gap-10 md:grid-cols-12">
         <div className="flex items-start gap-4 md:col-span-5">
           <Monograma className="h-12 w-12 shrink-0 text-ouro" />

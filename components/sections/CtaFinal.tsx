@@ -10,7 +10,7 @@ export function CtaFinal() {
   const hasAddress = isFilled(address.street);
 
   return (
-    <section id="contato" aria-labelledby="contato-t" className="grao relative overflow-hidden">
+    <section id="contato" aria-labelledby="contato-t" className="cv-auto grao relative overflow-hidden">
       <div className="absolute inset-y-0 right-0 hidden w-1/2 lg:block">
         <Image
           src={FOTOS.retrato}

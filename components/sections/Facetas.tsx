@@ -16,7 +16,7 @@ const PALCO_3D_BG =
 
 function TagIlustrativa({ label = IMAGEM_ILUSTRATIVA }: { label?: string }) {
   return (
-    <span className="pointer-events-none absolute right-3 top-3 z-10 bg-fundo/70 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia backdrop-blur">
+    <span className="pointer-events-none absolute right-3 top-3 z-10 bg-fundo/80 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia">
       {label}
     </span>
   );
@@ -24,7 +24,7 @@ function TagIlustrativa({ label = IMAGEM_ILUSTRATIVA }: { label?: string }) {
 
 export function Facetas() {
   return (
-    <section id="facetas" aria-labelledby="facetas-t" className="secao grao relative overflow-hidden">
+    <section id="facetas" aria-labelledby="facetas-t" className="cv-auto secao grao relative overflow-hidden">
       <div className="container-lp">
         <SectionHeading id="facetas" eyebrow={FACETAS.eyebrow} title={FACETAS.title} intro={FACETAS.intro} />
 

@@ -26,7 +26,7 @@ export function Header() {
   return (
     <header
       className={`header fixed inset-x-0 top-0 z-40 transition-[background-color,border-color,backdrop-filter] duration-500 ${
-        isScrolled ? 'border-b border-ouro/15 bg-fundo/85 backdrop-blur-md' : 'border-b border-transparent'
+        isScrolled ? 'border-b border-ouro/15 bg-fundo/95 lg:bg-fundo/85 lg:backdrop-blur-md' : 'border-b border-transparent'
       }`}
     >
       <div className="container-lp flex h-18 items-center justify-between gap-4 md:h-20">

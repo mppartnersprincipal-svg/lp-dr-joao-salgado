@@ -1,7 +1,4 @@
-'use client';
-
-import type { ReactNode } from 'react';
-import { animated, useInView } from '@react-spring/web';
+import type { CSSProperties, ReactNode } from 'react';
 
 interface RevealProps {
   children: ReactNode;
@@ -12,29 +9,19 @@ interface RevealProps {
   offset?: number;
 }
 
-const SPRING_CONFIG = { tension: 140, friction: 24 };
-const IN_VIEW_OPTIONS = { rootMargin: '0px 0px -12% 0px', once: true };
-
-/** Fade-in + slide-up ao entrar na tela (padrão de entrada M|P). */
-export function Reveal({ children, className, delay = 0, offset = 28 }: RevealProps) {
-  const [ref, springs] = useInView(
-    () => ({
-      from: { opacity: 0, y: offset },
-      to: { opacity: 1, y: 0 },
-      delay,
-      config: SPRING_CONFIG,
-    }),
-    IN_VIEW_OPTIONS,
-  );
-
+/**
+ * Fade-in + slide-up ao entrar na tela (padrão de entrada M|P).
+ * Sem JS próprio: a animação é CSS ([data-reveal] → .is-visible) e quem observa a tela é o
+ * componente único <Interactions />. Sem JavaScript, o <noscript> do layout mostra tudo.
+ */
+export function Reveal({ children, className, delay = 0, offset }: RevealProps) {
+  const style = {
+    ...(delay ? { '--reveal-delay': `${delay}ms` } : {}),
+    ...(offset !== undefined ? { '--reveal-offset': `${offset}px` } : {}),
+  } as CSSProperties;
   return (
-    <animated.div
-      ref={ref}
-      data-reveal=""
-      className={className}
-      style={{ opacity: springs.opacity, transform: springs.y.to((y) => `translate3d(0, ${y}px, 0)`) }}
-    >
+    <div data-reveal="" className={className} style={style}>
       {children}
-    </animated.div>
+    </div>
   );
 }

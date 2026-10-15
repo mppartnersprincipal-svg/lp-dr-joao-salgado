@@ -46,7 +46,8 @@ assets/fotos/            ← WebP gerados por `npm run images` a partir de Fotos
 - Fundo preto-café `--cor-fundo #0E0B09`, superfícies `#1B140F` / `#2E241F`, dourado do monograma `--cor-primaria #C8A46B` (só CTA e detalhes), seções claras `#F4EFE8`.
 - Títulos: Cormorant Garamond 300 (serifada fina, como nos posts). Corpo e rótulos: Jost.
 - Molduras em linha fina dourada, grão sutil, monograma JS (recriado; trocar pelo vetor oficial).
-- Animações: fade + slide-up ao rolar (react-spring `useInView`), H1 linha a linha (CSS), parallax só no desktop, botões scale + sombra. Respeita `prefers-reduced-motion`.
+- Animações: fade + slide-up ao rolar, H1 linha a linha, parallax só no desktop, botões scale + sombra. Respeita `prefers-reduced-motion`.
+- **Performance (out/2026):** as animações NÃO usam mais react-spring. `Reveal`, `SpotlightCard`, `TiltCard`, `ParallaxImage` e `CountUp` são componentes de servidor com atributos `data-*`; um único `components/ui/Interactions.tsx` (montado no layout) liga tudo por delegação, e a animação é CSS (`[data-reveal]` → `.is-visible` em `globals.css`). Lenis só no desktop (`pointer: fine`), carregado em `requestIdleCallback`. Seções abaixo da dobra têm `.cv-auto` (`content-visibility`, só < 1024px; não usar nas seções fixadas). Resultado no A/B intercalado (Lighthouse celular, mediana de 5): nota 55 → 86, TBT 1068 → 212 ms, JS 3,0 → 0,8 s. **Não reintroduzir um componente cliente por card/bloco.**
 
 ## Seções (ids = funil do /dashboard)
 `topo` · `credenciais` · `identificacao` · `facetas` · `avaliacao` (quiz) · `como-funciona` · `sobre` · `consultorio` (galeria) · `diferenciais` · `tratamentos` (cards `#implantes`, `#ortodontia`) · `faq` · `contato`. Se mudar a ordem, atualizar `SECTIONS.home` em `server/analytics/report.mjs` e `SECTION` em `public/dashboard/app.js`.

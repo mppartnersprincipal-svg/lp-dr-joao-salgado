@@ -21,7 +21,7 @@ export function WhatsAppFloat() {
         <WhatsAppIcon className="h-7 w-7" />
       </a>
 
-      <div className="sticky-cta fixed inset-x-0 bottom-0 z-40 border-t border-ouro/20 bg-fundo/95 px-4 py-3 backdrop-blur-sm md:hidden">
+      <div className="sticky-cta fixed inset-x-0 bottom-0 z-40 border-t border-ouro/20 bg-fundo/95 px-4 py-3 md:hidden">
         <WhatsAppButton ctaId="cta_whatsapp_sticky" size="md" className="w-full" />
       </div>
     </>

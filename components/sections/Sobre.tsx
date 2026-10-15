@@ -9,7 +9,7 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export function Sobre() {
   return (
-    <section id="sobre" aria-labelledby="sobre-t" className="secao grao relative overflow-hidden">
+    <section id="sobre" aria-labelledby="sobre-t" className="cv-auto secao grao relative overflow-hidden">
       <div className="container-lp grid items-center gap-16 lg:grid-cols-12 lg:gap-16">
         {/* fotos em camadas: a menor desliza em outra velocidade (profundidade) */}
         <Reveal className="relative mx-auto w-full max-w-md pb-16 pr-10 lg:col-span-5 lg:max-w-none">

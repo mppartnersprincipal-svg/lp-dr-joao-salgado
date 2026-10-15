@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { animated, useTransition } from '@react-spring/web';
 import { ArrowLeft, ArrowRight, Check, RotateCcw } from 'lucide-react';
 import { AVALIACAO, quizMessage, whatsappLinkWithText } from '@/config/content';
 import { track } from '@/lib/tracking';
@@ -19,13 +18,6 @@ export function Avaliacao() {
   const [step, setStep] = useState(0);
   const [incomodos, setIncomodos] = useState<string[]>([]);
   const [quando, setQuando] = useState('');
-
-  const transitions = useTransition(step, {
-    from: { opacity: 0, x: 24 },
-    enter: { opacity: 1, x: 0 },
-    leave: { opacity: 0, x: -24, position: 'absolute' as const },
-    config: { tension: 260, friction: 28 },
-  });
 
   const toggle = (label: string) =>
     setIncomodos((prev) => (prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]));
@@ -46,7 +38,7 @@ export function Avaliacao() {
   const progress = Math.min(step, RESULT_STEP) / RESULT_STEP;
 
   return (
-    <section id="avaliacao" aria-labelledby="avaliacao-t" className="secao relative overflow-hidden bg-superficie">
+    <section id="avaliacao" aria-labelledby="avaliacao-t" className="cv-auto secao relative overflow-hidden bg-superficie">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-40 top-1/3 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(200,164,107,0.12),transparent_65%)]"
@@ -57,7 +49,7 @@ export function Avaliacao() {
         </div>
 
         <div className="lg:col-span-7">
-          <div className="moldura relative bg-fundo/70 p-6 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)] backdrop-blur md:p-10">
+          <div className="moldura relative bg-fundo/85 p-6 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)] md:p-10">
             {/* progresso */}
             <div className="mb-8 flex items-center gap-4">
               <div className="h-px flex-1 bg-ouro/15">
@@ -72,16 +64,13 @@ export function Avaliacao() {
             </div>
 
             <div className="relative min-h-[22rem]">
-              {transitions((style, current) => (
-                <animated.div
-                  style={{ opacity: style.opacity, transform: style.x.to((x) => `translate3d(${x}px,0,0)`), position: style.position, inset: 0 }}
-                  className="w-full"
-                >
-                  {current < RESULT_STEP ? (
+              {/* key={step}: cada etapa remonta e entra com a animação CSS .passo-entrar */}
+              <div key={step} className="passo-entrar w-full">
+                  {step < RESULT_STEP ? (
                     <QuizStep
-                      index={current}
-                      selected={current === 0 ? incomodos : [quando]}
-                      onSelect={current === 0 ? toggle : choose}
+                      index={step}
+                      selected={step === 0 ? incomodos : [quando]}
+                      onSelect={step === 0 ? toggle : choose}
                     />
                   ) : (
                     <div>
@@ -117,8 +106,7 @@ export function Avaliacao() {
                       </div>
                     </div>
                   )}
-                </animated.div>
-              ))}
+              </div>
             </div>
 
             {step === 0 && (

@@ -98,7 +98,7 @@ export function Faceta3D({ label, hint, loadingText, fallback }: Faceta3DProps) 
       {status === 'pronto' && (
         <span
           aria-hidden="true"
-          className={`pointer-events-none absolute left-3 top-3 z-10 flex items-center gap-2 bg-fundo/70 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-ouro-claro backdrop-blur transition-opacity duration-700 ${
+          className={`pointer-events-none absolute left-3 top-3 z-10 flex items-center gap-2 bg-fundo/80 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-ouro-claro transition-opacity duration-700 ${
             interagiu ? 'opacity-0' : 'opacity-100'
           }`}
         >

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Jost } from 'next/font/google';
 import { CONTACT, DOCTOR, SITE, isFilled } from '@/config/content';
 import { TrackingProvider } from '@/components/tracking/TrackingProvider';
+import { Interactions } from '@/components/ui/Interactions';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
 import './globals.css';
 
@@ -9,7 +10,7 @@ import './globals.css';
 const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: ['300', '400'], // 500 não era usado (2 arquivos de fonte a menos no carregamento)
   style: ['normal', 'italic'],
   display: 'swap',
 });
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd() }} />
         <TrackingProvider>
           <SmoothScroll />
+          <Interactions />
           {children}
         </TrackingProvider>
       </body>

@@ -8,7 +8,7 @@ const STAGGER_MS = 90;
 
 export function Diferenciais() {
   return (
-    <section id="diferenciais" aria-labelledby="diferenciais-t" className="secao bg-creme text-tinta">
+    <section id="diferenciais" aria-labelledby="diferenciais-t" className="cv-auto secao bg-creme text-tinta">
       <div className="container-lp">
         <SectionHeading id="diferenciais" eyebrow={DIFERENCIAIS.eyebrow} title={DIFERENCIAIS.title} tone="claro" />
 

@@ -144,7 +144,7 @@ function PinnedLayout({ active }: { active: number }) {
             })}
             {/* etiqueta fora da camada com zoom (não é cortada) */}
             {ETAPAS[STEPS[active].image].ilustrativa && (
-              <span className="absolute right-3 top-3 z-10 bg-fundo/70 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia backdrop-blur">
+              <span className="absolute right-3 top-3 z-10 bg-fundo/80 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia">
                 {IMAGEM_ILUSTRATIVA}
               </span>
             )}
@@ -184,7 +184,7 @@ function ListLayout() {
                   <div className="relative aspect-[4/3] overflow-hidden border border-ouro/15">
                     <Image src={img.src} alt={img.alt} placeholder="blur" fill sizes="(min-width: 640px) 45vw, 100vw" className="object-cover" />
                     {img.ilustrativa && (
-                      <span className="absolute right-3 top-3 bg-fundo/70 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia backdrop-blur">
+                      <span className="absolute right-3 top-3 bg-fundo/80 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia">
                         {IMAGEM_ILUSTRATIVA}
                       </span>
                     )}
