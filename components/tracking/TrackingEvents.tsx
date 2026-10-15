@@ -31,7 +31,9 @@ function handleClick(e: MouseEvent) {
 function handleFaqClick(e: MouseEvent) {
   const summary = (e.target as Element | null)?.closest('.faq summary');
   if (!summary || (summary.parentElement as HTMLDetailsElement | null)?.open) return;
-  const question = (summary.textContent || '').replace(/\s+/g, ' ').trim().slice(0, FAQ_QUESTION_MAX);
+  // [data-faq-q] = só o texto da pergunta (sem o número decorativo)
+  const source = summary.querySelector('[data-faq-q]') || summary;
+  const question = (source.textContent || '').replace(/\s+/g, ' ').trim().slice(0, FAQ_QUESTION_MAX);
   track('faq_open', { faq_question: question });
 }
 

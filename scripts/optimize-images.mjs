@@ -16,6 +16,7 @@ const FOTOS = {
   '10.jpg': 'dr-joao-clinica',      // sobre
   '9.jpg': 'dr-joao-clinica-sorrindo',
   '8.jpg': 'dr-joao-xadrez',        // planejamento
+  '6.jpg': 'dr-joao-xadrez-sorrindo', // galeria do consultório
   '7.jpg': 'dr-joao-consultorio',   // acolhimento
   '1.jpg': 'dr-joao-retrato',       // CTA final
   '5.jpg': 'dr-joao-recepcao',

@@ -47,7 +47,7 @@ assets/fotos/            ← WebP gerados por `npm run images` a partir de Fotos
 - Animações: fade + slide-up ao rolar (react-spring `useInView`), H1 linha a linha (CSS), parallax só no desktop, botões scale + sombra. Respeita `prefers-reduced-motion`.
 
 ## Seções (ids = funil do /dashboard)
-`topo` · `credenciais` · `identificacao` · `facetas` · `como-funciona` · `sobre` · `diferenciais` · `tratamentos` (cards `#implantes`, `#ortodontia`) · `faq` · `contato`. Se mudar a ordem, atualizar `SECTIONS.home` em `server/analytics/report.mjs` e `SECTION` em `public/dashboard/app.js`.
+`topo` · `credenciais` · `identificacao` · `facetas` · `avaliacao` (quiz) · `como-funciona` · `sobre` · `consultorio` (galeria) · `diferenciais` · `tratamentos` (cards `#implantes`, `#ortodontia`) · `faq` · `contato`. Se mudar a ordem, atualizar `SECTIONS.home` em `server/analytics/report.mjs` e `SECTION` em `public/dashboard/app.js`.
 
 ## Comandos
 ```bash

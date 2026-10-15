@@ -166,10 +166,113 @@ html.lenis body {
   animation: surgir 0.9s var(--ease-suave) both;
 }
 
+/* Faixa infinita (Marquee) */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+/* Cartões de vidro do hero: entram e depois flutuam devagar */
+@keyframes flutuar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.flutuar {
+  animation:
+    surgir 0.9s var(--ease-suave) both,
+    flutuar 6s ease-in-out infinite;
+}
+
+/* Indicador "Role" do hero */
+@keyframes rolagem {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(250%);
+  }
+}
+.indicador-rolagem {
+  animation: rolagem 1.8s ease-in-out infinite;
+}
+
+/* Halo dourado atrás do CTA final */
+@keyframes halo {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08);
+  }
+}
+.halo {
+  animation: halo 6s ease-in-out infinite;
+}
+
+/* Reflexo que atravessa o botão principal de tempos em tempos */
+@keyframes brilho {
+  0%,
+  70% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+.brilho {
+  position: relative;
+  overflow: hidden;
+}
+.brilho::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: brilho 4.5s ease-in-out 2s infinite;
+}
+
+/* FAQ: abre e fecha com altura animada (navegadores com ::details-content; nos demais abre direto) */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+.faq-item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 0.5s var(--ease-suave),
+    content-visibility 0.5s allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .linha-revelar > span,
-  .surgir {
+  .surgir,
+  .flutuar,
+  .marquee-track,
+  .indicador-rolagem,
+  .halo,
+  .brilho::after {
     animation: none;
+  }
+  [data-scroll-reveal] span {
+    opacity: 1 !important;
   }
   html {
     scroll-behavior: auto;

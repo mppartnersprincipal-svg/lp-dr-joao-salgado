@@ -8,6 +8,8 @@ interface WhatsAppButtonProps {
   /** cta_id único do botão (evento click_whatsapp) */
   ctaId: WhatsAppCtaId;
   topic?: WhatsAppTopic;
+  /** link pronto (ex.: mensagem montada pelo quiz); senão usa a mensagem padrão do `topic` */
+  href?: string;
   label?: string;
   variant?: Variant;
   size?: Size;
@@ -21,15 +23,16 @@ const VARIANTS: Record<Variant, string> = {
 };
 
 const SIZES: Record<Size, string> = {
-  sm: 'min-h-10 px-4 text-[0.7rem] gap-2',
-  md: 'min-h-12 px-6 text-[0.75rem] gap-2.5',
-  lg: 'min-h-14 px-8 text-[0.8rem] gap-3',
+  sm: 'min-h-10 px-5 text-[0.7rem] gap-2',
+  md: 'min-h-12 px-7 text-[0.75rem] gap-2.5',
+  lg: 'min-h-14 px-9 text-[0.8rem] gap-3',
 };
 
 /** Link para o WhatsApp com cta_id próprio. Hover: scale + sombra (padrão M|P). */
 export function WhatsAppButton({
   ctaId,
   topic = 'facetas',
+  href,
   label = CTA_LABEL,
   variant = 'ouro',
   size = 'md',
@@ -37,11 +40,11 @@ export function WhatsAppButton({
 }: WhatsAppButtonProps) {
   return (
     <a
-      href={whatsappLink(topic)}
+      href={href ?? whatsappLink(topic)}
       target="_blank"
       rel="noopener noreferrer"
       data-cta={ctaId}
-      className={`inline-flex items-center justify-center font-sans font-medium uppercase tracking-[0.18em] transition-[transform,box-shadow,background-color,color,border-color] duration-300 ease-suave hover:scale-[1.03] active:scale-[0.98] ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      className={`inline-flex items-center justify-center rounded-full font-sans font-medium uppercase tracking-[0.18em] transition-[transform,box-shadow,background-color,color,border-color] duration-300 ease-suave hover:scale-[1.03] active:scale-[0.98] ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
     >
       <WhatsAppIcon className={size === 'sm' ? 'h-4 w-4' : 'h-[1.15rem] w-[1.15rem]'} />
       <span>{label}</span>

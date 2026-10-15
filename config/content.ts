@@ -80,7 +80,15 @@ export type WhatsAppCtaId =
   | 'cta_whatsapp_final'
   | 'cta_whatsapp_footer'
   | 'fab_whatsapp'
-  | 'cta_whatsapp_sticky';
+  | 'cta_whatsapp_sticky'
+  | 'cta_whatsapp_quiz';
+
+/** Nomes dos ícones (lucide) usados nos cards; o mapa fica em components/ui/Icon.tsx. */
+export type IconKey =
+  | 'award' | 'building' | 'gem' | 'shield' | 'camera' | 'smile' | 'droplets' | 'sparkles'
+  | 'palette' | 'fingerprint' | 'heartPulse' | 'message' | 'scan' | 'circleCheck' | 'hand'
+  | 'heartHandshake' | 'eye' | 'ear' | 'microscope' | 'shapes' | 'ruler' | 'moveHorizontal'
+  | 'eraser' | 'clock' | 'calendar' | 'layers' | 'stethoscope';
 
 export type WhatsAppTopic = 'facetas' | 'implantes' | 'ortodontia';
 
@@ -94,7 +102,15 @@ export function whatsappLink(topic: WhatsAppTopic = 'facetas'): string {
   return `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(WHATSAPP_MESSAGES[topic])}`;
 }
 
+/** Link com mensagem livre (usado pelo quiz, que monta o texto com as respostas). */
+export function whatsappLinkWithText(text: string): string {
+  return `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(text)}`;
+}
+
 export const CTA_LABEL = 'Agendar minha avaliação';
+
+/** Aviso exibido junto das imagens geradas (não são pacientes nem resultados). */
+export const IMAGEM_ILUSTRATIVA = 'Imagem ilustrativa';
 
 // ---------------------------------------------------------------------------
 // Seções (ids = section_id no GTM e no /dashboard, na ordem da página)
@@ -107,24 +123,32 @@ export const HERO = {
     'Há mais de 25 anos, o Dr. João Salgado planeja cada sorriso a partir de quem você é: tom de pele, traços do rosto e a sua identidade. Sem exagero e sem aquele branco artificial.',
   secondaryCta: 'Ver como funciona',
   badges: [DOCTOR.cro, '+25 anos de odontologia'],
+  // Cartões flutuantes sobre o retrato
+  floating: [
+    { icon: 'fingerprint', title: 'Planejamento sob medida', text: 'para o seu rosto' },
+    { icon: 'shield', title: DOCTOR.cro, text: 'cirurgião-dentista' },
+  ],
 } as const;
 
+export const MARQUEE = ['Naturalidade', 'Planejamento', 'Porcelana', 'Precisão', 'Acolhimento', 'Pós-atendimento'] as const;
+
 export const CREDENCIAIS = [
-  { value: '+25', label: 'anos de odontologia' },
-  { value: 'ISOdonto', label: 'fundador da rede de clínicas' },
-  { value: 'Allstima', label: 'fundador da clínica' },
-  { value: 'Neodent', label: 'implantes de procedência' },
+  { icon: 'award', count: 25, prefix: '+', value: '', label: 'anos de odontologia' },
+  { icon: 'building', count: 0, prefix: '', value: 'ISOdonto', label: 'fundador da rede de clínicas' },
+  { icon: 'gem', count: 0, prefix: '', value: 'Allstima', label: 'fundador da clínica' },
+  { icon: 'shield', count: 0, prefix: '', value: 'Neodent', label: 'implantes de procedência' },
 ] as const;
 
 export const IDENTIFICACAO = {
   eyebrow: 'Talvez você se reconheça aqui',
-  title: 'Sorriso bonito não é sorriso mais branco.',
-  quote: 'É aquele que ninguém percebe que foi feito, mas que combina com quem você é.',
+  // Frase revelada palavra por palavra conforme a rolagem
+  manifesto:
+    'Sorriso bonito não é sorriso mais branco. É aquele que ninguém percebe que foi feito, mas que combina com quem você é.',
   pains: [
-    'Você evita sorrir nas fotos ou disfarça o sorriso com a mão.',
-    'A cor, o tamanho ou o formato dos dentes incomodam quando você se olha no espelho.',
-    'Já fez facetas de resina que mancharam ou perderam o brilho com o tempo.',
-    'Tem receio de ficar com um sorriso artificial, que não combina com você.',
+    { icon: 'camera', text: 'Você evita sorrir nas fotos ou disfarça o sorriso com a mão.' },
+    { icon: 'smile', text: 'A cor, o tamanho ou o formato dos dentes incomodam quando você se olha no espelho.' },
+    { icon: 'droplets', text: 'Já fez facetas de resina que mancharam ou perderam o brilho com o tempo.' },
+    { icon: 'sparkles', text: 'Tem receio de ficar com um sorriso artificial, que não combina com você.' },
   ],
 } as const;
 
@@ -133,25 +157,79 @@ export const FACETAS = {
   title: 'Facetas de porcelana: beleza que acompanha a sua rotina',
   intro:
     'Lâminas finas de porcelana que corrigem cor, formato, tamanho e pequenas desarmonias dos dentes. A indicação para o seu caso é definida na avaliação.',
+  imageCaption: 'Lâminas de porcelana: finas, translúcidas e feitas uma a uma',
+  shadeCaption: 'A cor é escolhida junto com você, comparando tons naturais',
   benefits: [
     {
+      icon: 'palette',
       title: 'Cor mais estável no dia a dia',
       text: 'A porcelana é menos suscetível a manchas por pigmentos de alimentos e bebidas. Com os cuidados e o acompanhamento indicados, a cor tende a se manter por mais tempo.',
     },
     {
+      icon: 'gem',
       title: 'Naturalidade e translucidez',
       text: 'Cor, formato e proporção escolhidos para conversar com o seu tom de pele, a sua idade e os traços do seu rosto.',
     },
     {
+      icon: 'fingerprint',
       title: 'Sob medida para quem você é',
       text: 'O planejamento respeita a sua expressão e a sua rotina, inclusive a fala. O sorriso continua sendo seu, só que mais harmonioso.',
     },
     {
+      icon: 'heartPulse',
       title: 'Saúde em primeiro lugar',
       text: 'Gengiva e estrutura dos dentes entram no planejamento, para que o resultado seja bonito e saudável.',
     },
   ],
 } as const;
+
+// Quiz de pré-avaliação (qualificação do lead, sem perguntar sobre valores: regra do CRO)
+export const AVALIACAO = {
+  eyebrow: 'Pré-avaliação em 30 segundos',
+  title: 'Conte o que você quer mudar no seu sorriso',
+  intro: 'Responda duas perguntas e envie para o Dr. João pelo WhatsApp. Você revisa a mensagem antes de enviar.',
+  steps: [
+    {
+      question: 'O que mais te incomoda hoje?',
+      hint: 'Pode escolher mais de uma opção',
+      multiple: true,
+      options: [
+        { icon: 'palette', label: 'Cor dos dentes' },
+        { icon: 'shapes', label: 'Formato' },
+        { icon: 'ruler', label: 'Tamanho' },
+        { icon: 'moveHorizontal', label: 'Espaços entre os dentes' },
+        { icon: 'eraser', label: 'Desgastes ou fraturas' },
+        { icon: 'sparkles', label: 'Quero uma transformação completa' },
+      ],
+    },
+    {
+      question: 'Quando você pensa em começar?',
+      hint: 'Escolha uma opção',
+      multiple: false,
+      options: [
+        { icon: 'clock', label: 'O quanto antes' },
+        { icon: 'calendar', label: 'Nos próximos 30 dias' },
+        { icon: 'calendar', label: 'Nos próximos 3 meses' },
+        { icon: 'eye', label: 'Ainda estou pesquisando' },
+      ],
+    },
+  ],
+  resultTitle: 'Pronto! Sua mensagem está montada.',
+  cta: 'Enviar para o Dr. João',
+  back: 'Voltar',
+  next: 'Continuar',
+  restart: 'Refazer',
+} as const;
+
+export function quizMessage(incomodos: readonly string[], quando: string): string {
+  return [
+    'Olá, Dr. João! Vim pelo site e gostaria de agendar uma avaliação para facetas de porcelana.',
+    incomodos.length ? `O que me incomoda: ${incomodos.join(', ').toLowerCase()}.` : '',
+    quando ? `Quando penso em começar: ${quando.toLowerCase()}.` : '',
+  ]
+    .filter(Boolean)
+    .join('\n');
+}
 
 // TODO(validar com o Dr. João): etapas e textos do processo clínico
 export const COMO_FUNCIONA = {
@@ -159,22 +237,32 @@ export const COMO_FUNCIONA = {
   title: 'Como funciona o seu tratamento',
   steps: [
     {
+      icon: 'message',
+      image: 'consultorio',
       title: 'Avaliação',
       text: 'Uma conversa sem pressa: você conta o que te incomoda e o que espera do seu sorriso. O Dr. João examina e explica as opções para o seu caso.',
     },
     {
+      icon: 'scan',
+      image: 'planejamento',
       title: 'Planejamento',
       text: 'Estudo de proporções, formato e cor, pensado para o seu rosto e para a sua identidade.',
     },
     {
+      icon: 'circleCheck',
+      image: 'escala',
       title: 'Aprovação',
       text: 'Você entende cada etapa, tira todas as dúvidas e decide junto com o Dr. João.',
     },
     {
+      icon: 'hand',
+      image: 'laboratorio',
       title: 'Confecção e instalação',
       text: 'As facetas são confeccionadas e instaladas com precisão, com atenção a cada detalhe.',
     },
     {
+      icon: 'heartHandshake',
+      image: 'acompanhamento',
       title: 'Acompanhamento',
       text: 'O cuidado não termina no último dia de tratamento. O pós-atendimento faz parte do compromisso.',
     },
@@ -202,18 +290,22 @@ export const DIFERENCIAIS = {
   title: 'Técnica, cuidado e presença do início ao fim',
   items: [
     {
+      icon: 'eye',
       title: 'Atenção aos detalhes',
       text: 'Pequenas proporções e formatos fazem diferença no resultado final, por isso cada um é estudado.',
     },
     {
+      icon: 'heartHandshake',
       title: 'Pós-atendimento próximo',
       text: 'Estar presente, tirar dúvidas e acompanhar o seu resultado faz parte do tratamento.',
     },
     {
+      icon: 'microscope',
       title: 'Tecnologia com propósito',
       text: 'Planejamento digital e materiais de procedência, escolhidos com critério para cada caso.',
     },
     {
+      icon: 'ear',
       title: 'Escuta e acolhimento',
       text: 'Técnica sem empatia é apenas um processo. Cada paciente chega com uma história, e ela é respeitada.',
     },
@@ -221,11 +313,13 @@ export const DIFERENCIAIS = {
 } as const;
 
 interface Tratamento {
-  id: string;
+  id: 'implantes' | 'ortodontia';
+  icon: IconKey;
   topic: WhatsAppTopic;
   ctaId: WhatsAppCtaId;
   title: string;
   text: string;
+  highlights: readonly string[];
   cta: string;
 }
 
@@ -235,22 +329,40 @@ export const TRATAMENTOS: { eyebrow: string; title: string; items: readonly Trat
   items: [
     {
       id: 'implantes',
+      icon: 'layers',
       topic: 'implantes',
       ctaId: 'cta_whatsapp_implantes',
       title: 'Implantes dentários',
-      text: 'Da reposição de um dente à reabilitação com prótese fixa. No implante guiado, o planejamento digital ajuda a definir a posição do implante antes do procedimento. O Dr. João trabalha com implantes Neodent, marca com mais de 30 anos de história.',
+      text: 'Da reposição de um dente à reabilitação com prótese fixa. No implante guiado, o planejamento digital ajuda a definir a posição do implante antes do procedimento.',
+      highlights: ['Implante guiado com planejamento digital', 'Implantes Neodent, marca com mais de 30 anos de história', 'Da unidade à prótese fixa (protocolo)'],
       cta: 'Quero avaliar implantes',
     },
     {
       id: 'ortodontia',
+      icon: 'stethoscope',
       topic: 'ortodontia',
       ctaId: 'cta_whatsapp_ortodontia',
       title: 'Aparelhos ortodônticos',
       text: 'Alinhar os dentes também é cuidar da saúde e da função do sorriso. Na avaliação, o Dr. João indica o caminho mais adequado para o seu caso.',
+      highlights: ['Indicação definida na avaliação', 'Foco em saúde, função e estética', 'Acompanhamento durante todo o tratamento'],
       cta: 'Quero avaliar ortodontia',
     },
   ],
 };
+
+// Fotos reais do Dr. João (as imagens geradas por IA NÃO entram aqui: esta galeria mostra o consultório de verdade)
+export const CONSULTORIO = {
+  eyebrow: 'Por dentro do consultório',
+  title: 'Um ambiente pensado para você se sentir à vontade',
+  hint: 'Arraste para o lado',
+  photos: [
+    { key: 'recepcao', caption: 'Recepção da Allstima' },
+    { key: 'consultorio', caption: 'Conversa antes de qualquer decisão' },
+    { key: 'clinicaSorrindo', caption: 'Atendimento próximo' },
+    { key: 'xadrezSorrindo', caption: 'Planejar é antecipar cada movimento' },
+    { key: 'xadrez', caption: 'Precisão em cada detalhe' },
+  ],
+} as const;
 
 // TODO(validar com o Dr. João): respostas do FAQ
 export const FAQ = {
@@ -292,6 +404,7 @@ export const CTA_FINAL = {
   eyebrow: 'Agende sua avaliação',
   title: 'Seu novo sorriso começa com uma conversa.',
   text: 'Conte o que te incomoda e entenda, com calma, o que pode ser feito pelo seu sorriso.',
+  checklist: ['Conversa sem pressa', 'Planejamento individual', 'Acompanhamento depois do tratamento'],
 } as const;
 
 export const FOOTER = {

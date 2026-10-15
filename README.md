@@ -28,11 +28,12 @@ Tudo via **GTM** (`NEXT_PUBLIC_GTM_ID`), com Consent Mode v2: tudo `denied` até
 | `faq_open` | pergunta do FAQ aberta | `faq_question` |
 | `scroll_25/50/75/100` | profundidade de rolagem (1x por página) | `percent_scrolled` |
 | `section_view` | seção cruza o meio da tela (1x) | `section_id` |
+| `quiz_complete` | pré-avaliação respondida | `quiz_incomodos`, `quiz_quando` |
 | `consent_update` | escolha no banner de cookies | `consent_choice` |
 
 Todos os eventos levam `utm_source/medium/campaign/term/content` da URL de entrada (guardados na sessão). A mensagem do WhatsApp ganha `(ref: origem / mídia / campanha)` quando a visita veio de campanha.
 
-**cta_id** (todos únicos): `cta_whatsapp_header`, `cta_whatsapp_hero`, `cta_whatsapp_facetas`, `cta_whatsapp_como_funciona`, `cta_whatsapp_sobre`, `cta_whatsapp_implantes`, `cta_whatsapp_ortodontia`, `cta_whatsapp_faq`, `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp` (desktop), `cta_whatsapp_sticky` (barra fixa no celular).
+**cta_id** (todos únicos): `cta_whatsapp_header`, `cta_whatsapp_hero`, `cta_whatsapp_facetas`, `cta_whatsapp_como_funciona`, `cta_whatsapp_sobre`, `cta_whatsapp_implantes`, `cta_whatsapp_ortodontia`, `cta_whatsapp_faq`, `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp` (desktop), `cta_whatsapp_sticky` (barra fixa no celular), `cta_whatsapp_quiz` (envio da pré-avaliação).
 
 **URLs finais por serviço** (grupos de anúncio): `/#facetas`, `/#implantes`, `/#ortodontia`.
 

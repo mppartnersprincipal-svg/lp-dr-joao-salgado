@@ -27,6 +27,8 @@ const RESET: Params = {
   section_id: undefined,
   percent_scrolled: undefined,
   faq_question: undefined,
+  quiz_incomodos: undefined,
+  quiz_quando: undefined,
 };
 
 // Nome do evento no coletor do /dashboard
@@ -37,8 +39,10 @@ const COLLECT: Record<string, string> = {
   click_maps: 'cta_click',
   click_instagram: 'cta_click',
   faq_open: 'faq_open',
+  quiz_complete: 'cta_click',
 };
 const COLLECT_LABEL: Record<string, string> = {
+  quiz_complete: 'pré-avaliação concluída',
   click_phone: 'telefone',
   click_maps: 'maps',
   click_instagram: 'instagram',

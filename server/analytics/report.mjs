@@ -5,11 +5,11 @@ import { TZ_OFFSET_MS, localDate } from './period.mjs';
 // Seções da LP, na ordem de leitura. A chave vem do tracker: id da <section>, aria-labelledby sem "-t"
 // ou id do bloco pai (hero = #topo).
 export const SECTIONS = {
-  home: ['topo', 'credenciais', 'identificacao', 'facetas', 'como-funciona', 'sobre', 'diferenciais', 'tratamentos', 'casos', 'faq', 'contato'],
+  home: ['topo', 'credenciais', 'identificacao', 'facetas', 'avaliacao', 'como-funciona', 'sobre', 'consultorio', 'diferenciais', 'tratamentos', 'casos', 'faq', 'contato'],
 };
 export const SECTION_LABEL = {
-  topo: 'Hero', credenciais: 'Credenciais', identificacao: 'Identificação', facetas: 'Facetas de porcelana',
-  'como-funciona': 'Como funciona', sobre: 'Sobre o Dr. João', diferenciais: 'Diferenciais', tratamentos: 'Outros tratamentos',
+  topo: 'Hero', credenciais: 'Credenciais', identificacao: 'Identificação', facetas: 'Facetas de porcelana', avaliacao: 'Pré-avaliação (quiz)',
+  'como-funciona': 'Como funciona', sobre: 'Sobre o Dr. João', consultorio: 'Consultório (galeria)', diferenciais: 'Diferenciais', tratamentos: 'Outros tratamentos',
   casos: 'Casos', faq: 'FAQ', contato: 'CTA final / contato',
 };
 

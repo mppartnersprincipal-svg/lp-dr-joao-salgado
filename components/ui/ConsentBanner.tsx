@@ -38,14 +38,14 @@ export function ConsentBanner() {
         <button
           type="button"
           onClick={() => choose('accepted')}
-          className="min-h-11 bg-ouro px-5 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-fundo transition-colors hover:bg-ouro-claro"
+          className="min-h-11 rounded-full bg-ouro px-6 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-fundo transition-colors hover:bg-ouro-claro"
         >
           Aceitar
         </button>
         <button
           type="button"
           onClick={() => choose('essential')}
-          className="moldura min-h-11 px-5 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-marfim transition-colors hover:border-ouro"
+          className="moldura min-h-11 rounded-full px-6 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-marfim transition-colors hover:border-ouro"
         >
           Só o essencial
         </button>

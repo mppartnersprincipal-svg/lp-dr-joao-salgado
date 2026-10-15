@@ -1,32 +1,44 @@
 import { IDENTIFICACAO } from '@/config/content';
+import { IconBadge } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
-import { SectionHeading } from '@/components/ui/SectionHeading';
+import { ScrollTextReveal } from '@/components/ui/ScrollTextReveal';
+import { SpotlightCard } from '@/components/ui/SpotlightCard';
 
 const STAGGER_MS = 90;
 
 export function Identificacao() {
   return (
     <section id="identificacao" aria-labelledby="identificacao-t" className="secao bg-creme text-tinta">
-      <div className="container-lp grid gap-14 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-6">
-          <SectionHeading id="identificacao" eyebrow={IDENTIFICACAO.eyebrow} title={IDENTIFICACAO.title} tone="claro" />
-          <Reveal delay={120}>
-            <blockquote className="mt-10 border-l border-ouro-escuro/50 pl-6 font-serif text-2xl font-light italic leading-snug text-tinta/80 md:text-[1.7rem]">
-              “{IDENTIFICACAO.quote}”
-            </blockquote>
-          </Reveal>
-        </div>
+      <div className="container-lp">
+        <p className="eyebrow flex items-center gap-3 text-ouro-escuro">
+          <span aria-hidden="true" className="h-px w-8 bg-current opacity-60" />
+          {IDENTIFICACAO.eyebrow}
+        </p>
 
-        <ol className="flex flex-col lg:col-span-6 lg:pt-16">
+        {/* Manifesto: acende palavra por palavra conforme a rolagem */}
+        <h2 id="identificacao-t" className="mt-8 max-w-5xl">
+          <ScrollTextReveal
+            text={IDENTIFICACAO.manifesto}
+            highlight={['branco.', 'combina']}
+            className="font-serif text-[2.1rem] font-light leading-[1.12] tracking-[-0.01em] md:text-6xl md:leading-[1.08]"
+          />
+        </h2>
+
+        <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {IDENTIFICACAO.pains.map((pain, i) => (
-            <li key={pain} className="border-t border-tinta/15 last:border-b">
-              <Reveal delay={i * STAGGER_MS} className="flex gap-6 py-6">
-                <span className="font-serif text-lg text-ouro-escuro">{String(i + 1).padStart(2, '0')}</span>
-                <p className="text-base leading-relaxed text-tinta/85 md:text-lg">{pain}</p>
+            <li key={pain.text}>
+              <Reveal delay={i * STAGGER_MS} className="h-full">
+                <SpotlightCard
+                  tone="claro"
+                  className="h-full border border-tinta/10 bg-white/45 p-6 transition-[transform,box-shadow,border-color] duration-500 hover:-translate-y-1 hover:border-ouro-escuro/40 hover:shadow-[0_24px_50px_-28px_rgba(42,33,27,0.45)]"
+                >
+                  <IconBadge name={pain.icon} tone="claro" />
+                  <p className="mt-5 leading-relaxed text-tinta/85">{pain.text}</p>
+                </SpotlightCard>
               </Reveal>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );
