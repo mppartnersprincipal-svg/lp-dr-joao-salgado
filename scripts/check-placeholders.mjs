@@ -14,13 +14,20 @@ async function main() {
     for (const m of text.matchAll(PATTERN)) pending.push(`${file}: ${m[0].replace('TODO(PREENCHER):', '').trim()}`);
   }
   if (!process.env.NEXT_PUBLIC_GTM_ID) pending.push('env: NEXT_PUBLIC_GTM_ID (sem ele o GTM não carrega)');
-  if (!process.env.NEXT_PUBLIC_SITE_URL) pending.push('env: NEXT_PUBLIC_SITE_URL (canonical, OG e Schema)');
+  const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (!process.env.NEXT_PUBLIC_SITE_URL) {
+    pending.push(
+      vercelUrl
+        ? `env: NEXT_PUBLIC_SITE_URL não definido; usando o domínio de produção da Vercel (https://${vercelUrl})`
+        : 'env: NEXT_PUBLIC_SITE_URL (canonical, OG e Schema)',
+    );
+  }
 
   if (!pending.length) return console.info('✓ Nenhum dado pendente.');
   console.warn(`\n⚠ ${pending.length} dado(s) pendente(s) antes de publicar:\n  - ${pending.join('\n  - ')}\n`);
   // Build de produção na Vercel sem domínio poria localhost no canonical/OG/Schema: falha.
-  if (process.env.VERCEL_ENV === 'production' && !process.env.NEXT_PUBLIC_SITE_URL) {
-    console.error('✖ NEXT_PUBLIC_SITE_URL é obrigatório no deploy de produção.');
+  if (process.env.VERCEL_ENV === 'production' && !process.env.NEXT_PUBLIC_SITE_URL && !vercelUrl) {
+    console.error('✖ Sem NEXT_PUBLIC_SITE_URL nem VERCEL_PROJECT_PRODUCTION_URL: defina o domínio na Vercel.');
     process.exit(1);
   }
   if (process.argv.includes('--strict')) process.exit(1);

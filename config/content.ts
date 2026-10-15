@@ -20,7 +20,11 @@ export const isFilled = (value: string): boolean => Boolean(value) && value !== 
 
 export const SITE = {
   // TODO(PREENCHER): domínio final (conferir com `curl -sI` qual host não redireciona)
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  // Ordem: domínio definido à mão → domínio de produção que a Vercel informa no build
+  // (o *.vercel.app ou o domínio do cliente, quando ligado) → localhost no dev.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000'),
   name: 'Dr. João Salgado',
   title: 'Facetas de Porcelana em Goiânia | Dr. João Salgado',
   description:
