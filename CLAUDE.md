@@ -32,6 +32,8 @@ config/content.ts        ← TODA a copy, contatos, cta_ids e flags
 app/                     ← layout (fontes, metadata, JSON-LD Dentist), page, privacidade, robots, sitemap, api/*
 components/sections/     ← uma seção por arquivo, na ordem da página
 components/ui/           ← WhatsAppButton, Reveal, SmoothScroll, ParallaxImage, ConsentBanner, WhatsAppFloat...
+components/ui/Faceta3D   ← faceta de porcelana 3D girável (seção Facetas); a cena fica em lib/faceta3d.ts
+                           e o three.js só baixa quando a seção se aproxima (import dinâmico, ~135 KB gzip)
 components/tracking/     ← TrackingProvider (GTM + Consent Mode v2), TrackingEvents, UTMCapture
 lib/tracking.ts          ← helpers do dataLayer
 server/analytics/        ← libs do painel (template lp-tracking-dashboard, portado para route handlers)

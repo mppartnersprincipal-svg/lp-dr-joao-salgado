@@ -157,7 +157,15 @@ export const FACETAS = {
   title: 'Facetas de porcelana: beleza que acompanha a sua rotina',
   intro:
     'Lâminas finas de porcelana que corrigem cor, formato, tamanho e pequenas desarmonias dos dentes. A indicação para o seu caso é definida na avaliação.',
-  imageCaption: 'Lâminas de porcelana: finas, translúcidas e feitas uma a uma',
+  // Faceta 3D interativa (components/ui/Faceta3D.tsx); sem WebGL, mostra a foto SERVICOS.facetas
+  modelo3d: {
+    tag: 'Modelo ilustrativo',
+    hint: 'Arraste para girar',
+    loading: 'Carregando modelo 3D',
+    caption: 'Uma lâmina fina de porcelana, feita sob medida para o seu dente',
+    label:
+      'Modelo 3D de uma faceta de porcelana: uma lâmina fina e curva no formato de um dente da frente, que pode ser girada para ver a espessura.',
+  },
   shadeCaption: 'A cor é escolhida junto com você, comparando tons naturais',
   benefits: [
     {

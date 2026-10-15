@@ -29,6 +29,7 @@ Tudo via **GTM** (`NEXT_PUBLIC_GTM_ID`), com Consent Mode v2: tudo `denied` até
 | `scroll_25/50/75/100` | profundidade de rolagem (1x por página) | `percent_scrolled` |
 | `section_view` | seção cruza o meio da tela (1x) | `section_id` |
 | `quiz_complete` | pré-avaliação respondida | `quiz_incomodos`, `quiz_quando` |
+| `interact_3d` | visitante girou a faceta 3D (1x por página) | `section_id=facetas` |
 | `consent_update` | escolha no banner de cookies | `consent_choice` |
 
 Todos os eventos levam `utm_source/medium/campaign/term/content` da URL de entrada (guardados na sessão). A mensagem do WhatsApp ganha `(ref: origem / mídia / campanha)` quando a visita veio de campanha.

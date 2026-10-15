@@ -5,7 +5,7 @@
  * para o dataLayer; nada de gtag/pixel direto (contaria em dobro).
  *
  * Eventos: click_whatsapp (cta_id) · click_cta · click_phone · click_maps · click_instagram
- *          · faq_open · scroll_25/50/75/100 · section_view
+ *          · faq_open · scroll_25/50/75/100 · section_view · interact_3d (faceta 3D girada)
  * UTMs da URL de entrada ficam na sessão e seguem junto em cada evento.
  * Cliques e FAQ também vão para o coletor do /dashboard (public/js/tracker.js → window.jsCollect).
  */

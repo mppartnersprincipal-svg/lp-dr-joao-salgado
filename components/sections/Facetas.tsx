@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { FACETAS, IMAGEM_ILUSTRATIVA } from '@/config/content';
 import { SERVICOS } from '@/lib/images';
+import { Faceta3D } from '@/components/ui/Faceta3D';
 import { IconBadge } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -9,10 +10,14 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 const STAGGER_MS = 90;
 
-function TagIlustrativa() {
+// Halo dourado atrás da faceta 3D, sobre a superfície escura
+const PALCO_3D_BG =
+  'radial-gradient(ellipse at 50% 38%, rgba(200,164,107,0.16), transparent 62%), linear-gradient(to bottom, var(--cor-superficie), var(--cor-fundo))';
+
+function TagIlustrativa({ label = IMAGEM_ILUSTRATIVA }: { label?: string }) {
   return (
-    <span className="absolute right-3 top-3 z-10 bg-fundo/70 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia backdrop-blur">
-      {IMAGEM_ILUSTRATIVA}
+    <span className="pointer-events-none absolute right-3 top-3 z-10 bg-fundo/70 px-2 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-areia backdrop-blur">
+      {label}
     </span>
   );
 }
@@ -23,22 +28,35 @@ export function Facetas() {
       <div className="container-lp">
         <SectionHeading id="facetas" eyebrow={FACETAS.eyebrow} title={FACETAS.title} intro={FACETAS.intro} />
 
-        {/* Bento: imagem principal + benefícios + escala de cor */}
+        {/* Bento: faceta 3D + benefícios + escala de cor */}
         <div className="mt-16 grid gap-4 lg:grid-cols-12 lg:grid-rows-[auto_auto]">
           <Reveal className="relative lg:col-span-5 lg:row-span-2">
-            <figure className="group relative h-full min-h-[26rem] overflow-hidden border border-ouro/15">
-              <TagIlustrativa />
-              <Image
-                src={SERVICOS.facetas}
-                alt="Lâminas de porcelana translúcidas dispostas em arco sobre pedra escura"
-                placeholder="blur"
-                fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover object-[30%_40%] transition-transform duration-[1.4s] ease-suave group-hover:scale-105"
+            <figure
+              className="relative h-full min-h-[30rem] overflow-hidden border border-ouro/15"
+              style={{ background: PALCO_3D_BG }}
+            >
+              <TagIlustrativa label={FACETAS.modelo3d.tag} />
+              <Faceta3D
+                label={FACETAS.modelo3d.label}
+                hint={FACETAS.modelo3d.hint}
+                loadingText={FACETAS.modelo3d.loading}
+                fallback={
+                  <Image
+                    src={SERVICOS.facetas}
+                    alt="Lâminas de porcelana translúcidas dispostas em arco sobre pedra escura"
+                    placeholder="blur"
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover object-[30%_40%]"
+                  />
+                }
               />
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-fundo via-fundo/10 to-transparent" />
-              <figcaption className="absolute inset-x-6 bottom-6 font-serif text-2xl leading-snug text-marfim md:text-[1.7rem]">
-                {FACETAS.imageCaption}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-fundo to-transparent"
+              />
+              <figcaption className="pointer-events-none absolute inset-x-6 bottom-6 font-serif text-2xl leading-snug text-marfim md:text-[1.7rem]">
+                {FACETAS.modelo3d.caption}
               </figcaption>
             </figure>
           </Reveal>
