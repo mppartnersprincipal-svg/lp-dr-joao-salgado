@@ -12,7 +12,7 @@ npm run dev
 O `npm run build` lista o que falta (`scripts/check-placeholders.mjs`). Hoje:
 - WhatsApp comercial, endereço, horário, link do Maps, responsável técnico (`config/content.ts`)
 - Confirmar o CRO-GO 6835 (tirado da bio do Instagram) e validar a copy com o Dr. João (FAQ e etapas do tratamento)
-- Domínio (`NEXT_PUBLIC_SITE_URL`) e IDs do GTM/GA4/Google Ads/Pixel
+- Meta Pixel (quando houver campanha no Meta; configurar no GTM)
 - Monograma/logo em vetor oficial (hoje recriado em SVG)
 - Antes e depois: só com autorização escrita dos pacientes (`FLAGS.casos`)
 
@@ -38,11 +38,22 @@ Todos os eventos levam `utm_source/medium/campaign/term/content` da URL de entra
 
 **URLs finais por serviço** (grupos de anúncio): `/#facetas`, `/#implantes`, `/#ortodontia`.
 
+### IDs (padrão em `TRACKING`, `config/content.ts`)
+| | |
+|---|---|
+| Domínio | `https://www.doutorjoaosalgado.com.br` (o sem www redireciona) |
+| GTM | `GTM-5T5GNXML` (`NEXT_PUBLIC_GTM_ID` sobrescreve) |
+| GA4 | `G-9NWEM4VB8G` |
+| Google Ads | conta `761-464-6639`; conversão "Clique no Botão de Wpp" `AW-18268832485/UqNCCM6NgZ8dEOWFoYdE` → `click_whatsapp` |
+| Meta Pixel | ainda não |
+
 ### JSON de importação do GTM
-Com os IDs em mãos:
+Arquivo: `gtm/GTM-5T5GNXML-importar.json` (tags GA4 config + evento, vinculador e conversão do Ads). Para regerar:
 ```bash
-python ~/.claude/skills/lp-tracking-dashboard/scripts/gtm_container.py --gtm GTM-XXX --ga4 G-XXX \
-  --name dominio.com.br --conv "Clique no Botão de Wpp|<id AW>|<rótulo>|click_whatsapp" --out gtm/GTM-XXX-importar.json
+python ~/.claude/skills/lp-tracking-dashboard/scripts/gtm_container.py --gtm GTM-5T5GNXML --ga4 G-9NWEM4VB8G \
+  --name doutorjoaosalgado.com.br --conv "Clique no Botão de Wpp|18268832485|UqNCCM6NgZ8dEOWFoYdE|click_whatsapp" \
+  --events click_whatsapp,click_cta,click_phone,click_maps,click_instagram,faq_open,scroll_25,scroll_50,scroll_75,scroll_100,section_view,quiz_complete,interact_3d \
+  --out gtm/GTM-5T5GNXML-importar.json
 ```
 GTM → Administrador → Importar contêiner → **Mesclar + Substituir conflitantes** → Visualizar → Publicar. No GA4, marcar `click_whatsapp` como evento-chave.
 

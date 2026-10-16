@@ -18,13 +18,13 @@ export const PREENCHER = '[PREENCHER]';
 /** true quando o dado já foi preenchido (a página nunca exibe "[PREENCHER]"). */
 export const isFilled = (value: string): boolean => Boolean(value) && value !== PREENCHER;
 
+/** Domínio final: o host com www (o sem www redireciona 308 para ele). */
+export const DOMINIO_PRODUCAO = 'https://www.doutorjoaosalgado.com.br';
+
 export const SITE = {
-  // TODO(PREENCHER): domínio final (conferir com `curl -sI` qual host não redireciona)
-  // Ordem: domínio definido à mão → domínio de produção que a Vercel informa no build
-  // (o *.vercel.app ou o domínio do cliente, quando ligado) → localhost no dev.
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000'),
+  // Ordem: NEXT_PUBLIC_SITE_URL (sobrescreve) → domínio final em qualquer build da Vercel
+  // (preview também aponta o canonical para produção) → localhost no dev.
+  url: process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL ? DOMINIO_PRODUCAO : 'http://localhost:3000'),
   name: 'Dr. João Salgado',
   title: 'Facetas de Porcelana em Goiânia | Dr. João Salgado',
   description:
@@ -61,6 +61,19 @@ export const CONTACT = {
   mapsUrl: '',
   // TODO(PREENCHER): horário de atendimento
   hours: PREENCHER,
+} as const;
+
+/**
+ * IDs públicos de medição (não são segredo). GA4 e Google Ads ficam DENTRO do GTM:
+ * ga4Id e a conversão estão aqui só como referência do JSON em gtm/.
+ * NEXT_PUBLIC_GTM_ID, se definido na Vercel, sobrescreve o gtmId.
+ */
+export const TRACKING = {
+  gtmId: 'GTM-5T5GNXML',
+  ga4Id: 'G-9NWEM4VB8G',
+  googleAdsCustomerId: '761-464-6639',
+  conversaoWhatsapp: { id: '18268832485', rotulo: 'UqNCCM6NgZ8dEOWFoYdE', evento: 'click_whatsapp' },
+  // TODO(PREENCHER): Meta Pixel quando houver campanha no Meta (configurar no GTM, não no código)
 } as const;
 
 export const FLAGS = {

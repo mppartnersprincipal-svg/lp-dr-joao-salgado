@@ -13,7 +13,7 @@ Contexto completo do cliente (regras do CRO, estratégia, público): `C:\Users\U
 | Objetivo | Leads de **facetas de porcelana** via WhatsApp (tráfego pago Google + Meta) |
 | CTA | "Agendar minha avaliação" → WhatsApp |
 | WhatsApp | `[PREENCHER]` em `config/content.ts` |
-| URL | `[PREENCHER]` → `NEXT_PUBLIC_SITE_URL` |
+| URL | https://www.doutorjoaosalgado.com.br (padrão em `config/content.ts`; o sem www redireciona) |
 
 ## Regras inegociáveis (CFO / cliente)
 - Nada de preço, parcelamento, desconto, "grátis" ou condição de pagamento.

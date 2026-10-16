@@ -22,7 +22,9 @@ Página ──dataLayer──▶ GTM ──▶ GA4 (eventos) + Google Ads (conve
 2. **Vercel → Environment Variables** (ver `.env.example`): `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `DASHBOARD_PASSWORD`, `DASHBOARD_SECRET` e, para as seções extras, as `GOOGLE_ADS_*`, `GA4_PROPERTY_ID` e `GOOGLE_SERVICE_ACCOUNT_JSON`.
 3. **Redeploy** (as variáveis só valem depois dele).
 4. Conferir: `/api/collect` responde 204; login com senha errada responde "Senha incorreta."; visita com `?utm_campaign=qa-seed` aparece no painel.
-5. GA4: a conta de serviço precisa ser **Leitor** na propriedade do cliente. Google Ads: `GOOGLE_ADS_CUSTOMER_ID` é a conta do cliente (10 dígitos).
+5. GA4: a conta de serviço precisa ser **Leitor** na propriedade do cliente (G-9NWEM4VB8G). Google Ads: `GOOGLE_ADS_CUSTOMER_ID=7614646639` (conta do cliente, via MCC 603-989-2603).
+
+O Supabase compartilhado fica na organização **Sólida Transporte**. O conector do Claude autoriza uma organização por vez: se `list_tables` der "permission", reautorizar essa organização.
 
 Segurança: `/api/collect` é público (como em todas as LPs da M|P) e `/api/login` tem atraso fixo. Recomendado ativar rate limit no **Vercel Firewall** para `/api/collect` e `/api/login`, e usar uma senha longa no painel.
 

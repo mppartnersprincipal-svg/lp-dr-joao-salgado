@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import type { ReactNode } from 'react';
+import { TRACKING } from '@/config/content';
 import { CONSENT_KEY, validGtmId } from '@/lib/tracking';
 import { TrackingEvents } from './TrackingEvents';
 import { UTMCapture } from './UTMCapture';
@@ -8,7 +9,7 @@ interface TrackingProviderProps {
   children: ReactNode;
 }
 
-const GTM_ID = validGtmId(process.env.NEXT_PUBLIC_GTM_ID);
+const GTM_ID = validGtmId(process.env.NEXT_PUBLIC_GTM_ID || TRACKING.gtmId);
 
 // Consent Mode v2 (LGPD): tudo "denied" até o visitante aceitar no banner; quem já aceitou antes
 // entra como "granted". Depois disso o GTM carrega. Script inline porque precisa rodar ANTES do gtm.js.
