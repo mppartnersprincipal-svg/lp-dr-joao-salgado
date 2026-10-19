@@ -43,8 +43,8 @@ export const DOCTOR = {
 } as const;
 
 export const CONTACT = {
-  // TODO(PREENCHER): WhatsApp comercial só com dígitos, com DDI e DDD (ex.: 5562900000000)
-  whatsapp: PREENCHER,
+  // WhatsApp comercial só com dígitos, com DDI e DDD: (62) 9 9967-5077
+  whatsapp: '5562999675077',
   // TODO(PREENCHER): telefone fixo, se houver (deixe vazio para esconder)
   phone: '',
   instagram: 'https://www.instagram.com/dr.joaosalgado/',
