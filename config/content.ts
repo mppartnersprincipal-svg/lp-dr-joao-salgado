@@ -73,7 +73,8 @@ export const TRACKING = {
   ga4Id: 'G-9NWEM4VB8G',
   googleAdsCustomerId: '761-464-6639',
   conversaoWhatsapp: { id: '18268832485', rotulo: 'UqNCCM6NgZ8dEOWFoYdE', evento: 'click_whatsapp' },
-  // TODO(PREENCHER): Meta Pixel quando houver campanha no Meta (configurar no GTM, não no código)
+  // Meta Pixel "Pixel Site - Doutor João" (BM do Dr. João). Base + Lead ficam no GTM (gtm/*.json), não no código.
+  metaPixelId: '3565437143629261',
 } as const;
 
 export const FLAGS = {

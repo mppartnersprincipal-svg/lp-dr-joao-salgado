@@ -56,6 +56,7 @@ python ~/.claude/skills/lp-tracking-dashboard/scripts/gtm_container.py --gtm GTM
   --out gtm/GTM-5T5GNXML-importar.json
 ```
 GTM → Administrador → Importar contêiner → **Mesclar + Substituir conflitantes** → Visualizar → Publicar. No GA4, marcar `click_whatsapp` como evento-chave.
+O JSON também traz o **Meta Pixel** em duas tags de HTML personalizado, ambas com consentimento `ad_storage`: a **base** (`fbq('init','3565437143629261')` + PageView, pixel "Pixel Site - Doutor João" da BM do Dr. João, dispara em All Pages ou no `consent_update` aceito) e a **Lead** (gatilho `click_whatsapp`). Depois de importar, **apagar a tag antiga do pixel** `1153422360581081`: ela pertence à BM da Pádua Corretora, não ao Dr. João. Conferir no modo Visualizar: aceitar o banner deve disparar o PageView, e clicar num botão de WhatsApp deve disparar GA4, conversão do Ads e o Lead do Meta.
 
 ## Testes
 - `npm test`: 83 testes das libs do painel (coleta, relatório, GA4, Google Ads, período).

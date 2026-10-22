@@ -12,7 +12,7 @@ Contexto completo do cliente (regras do CRO, estratégia, público): `C:\Users\U
 | Segmento | Odontologia estética, público A/B de Goiânia |
 | Objetivo | Leads de **facetas de porcelana** via WhatsApp (tráfego pago Google + Meta) |
 | CTA | "Agendar minha avaliação" → WhatsApp |
-| WhatsApp | `[PREENCHER]` em `config/content.ts` |
+| WhatsApp | 5562999675077 (`CONTACT.whatsapp` em `config/content.ts`) |
 | URL | https://www.doutorjoaosalgado.com.br (padrão em `config/content.ts`; o sem www redireciona) |
 
 ## Regras inegociáveis (CFO / cliente)

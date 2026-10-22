@@ -313,6 +313,89 @@
         "consentSettings": {
           "consentStatus": "NOT_SET"
         }
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "211",
+        "name": "Meta Pixel - Lead - Clique no Botão de Wpp",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n  // Meta Pixel: Lead no clique de WhatsApp. O pixel base (PageView) já está no contêiner;\n  // o guard evita erro se o visitante recusou cookies e o fbq não carregou.\n  (function () {\n    if (typeof window.fbq !== 'function') return;\n    window.fbq('track', 'Lead', {\n      content_name: {{dlv - cta_id}} || 'whatsapp',\n      content_category: 'facetas',\n      utm_source: {{dlv - utm_source}} || '',\n      utm_campaign: {{dlv - utm_campaign}} || ''\n    });\n  })();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "101"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "setupTag": [
+          {
+            "tagName": "Meta Pixel - Base (PageView) - BM Dr. João",
+            "stopOnSetupFailure": false
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "212",
+        "name": "Meta Pixel - Base (PageView) - BM Dr. João",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n  // Meta Pixel base (BM do Dr. João). Dispara em All Pages (se o visitante já aceitou cookies)\n  // ou no evento consent_update quando ele aceita no banner; o guard evita inicializar duas vezes.\n  (function () {\n    if (window.__jsPixelInit) return;\n    window.__jsPixelInit = true;\n    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\n    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\n    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',\n    'https://connect.facebook.net/en_US/fbevents.js');\n    fbq('init', '3565437143629261');\n    fbq('track', 'PageView');\n  })();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553",
+          "102"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        }
       }
     ],
     "trigger": [
@@ -359,6 +442,47 @@
                 "type": "TEMPLATE",
                 "key": "arg1",
                 "value": "click_whatsapp"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "102",
+        "name": "CE - consent_update (aceito)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "consent_update"
+              }
+            ]
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{dlv - consent_choice}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "accepted"
               }
             ]
           }
@@ -593,6 +717,30 @@
             "type": "TEMPLATE",
             "key": "name",
             "value": "utm_content"
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "120",
+        "name": "dlv - consent_choice",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "consent_choice"
           }
         ]
       }
