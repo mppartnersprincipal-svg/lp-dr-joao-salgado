@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Jost } from 'next/font/google';
-import { CONTACT, DOCTOR, SITE, isFilled } from '@/config/content';
+import { CONTACT, DOCTOR, FAQ, SITE, isFilled } from '@/config/content';
 import { TrackingProvider } from '@/components/tracking/TrackingProvider';
 import { Interactions } from '@/components/ui/Interactions';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
@@ -71,13 +71,30 @@ function jsonLd() {
       jobTitle: DOCTOR.profession,
       identifier: DOCTOR.cro,
     },
-    availableService: ['Facetas de porcelana', 'Implantes dentários', 'Aparelhos ortodônticos'].map((name) => ({
-      '@type': 'MedicalProcedure',
-      name,
+    availableService: [
+      // Nomes alternativos = como as pessoas pesquisam (grupos da campanha de Pesquisa)
+      {
+        '@type': 'MedicalProcedure',
+        name: 'Facetas de porcelana',
+        alternateName: ['Lentes de contato dental', 'Facetas dentárias', 'Laminados cerâmicos', 'Porcelana nos dentes'],
+      },
+      { '@type': 'MedicalProcedure', name: 'Implantes dentários' },
+      { '@type': 'MedicalProcedure', name: 'Aparelhos ortodônticos' },
+    ],
+  };
+  // FAQPage: as perguntas da seção #faq, para rich results e para mecanismos de resposta (GEO)
+  const faq = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${SITE.url}/#faq`,
+    mainEntity: FAQ.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
     })),
   };
   // Escapa "<" para o JSON não fechar a tag <script> (recomendação do guia de JSON-LD do Next)
-  return JSON.stringify(data).replace(/</g, '\\u003c');
+  return JSON.stringify([data, faq]).replace(/</g, '\\u003c');
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {

@@ -63,12 +63,12 @@ export function Hero() {
         </div>
 
         <div className="relative -mt-20 lg:col-span-7 lg:mt-0 lg:pr-8">
-          <p className="eyebrow surgir mb-6 flex items-center gap-3 text-ouro">
-            <span aria-hidden="true" className="h-px w-10 bg-current opacity-60" />
-            {HERO.eyebrow}
-          </p>
-
+          {/* O selo faz parte do h1 (palavra-chave + cidade para SEO), com o mesmo visual de antes */}
           <h1 id="topo-t" className="font-serif text-[2.6rem] font-light leading-[1.02] tracking-[-0.015em] text-marfim sm:text-6xl xl:text-7xl">
+            <span className="eyebrow surgir mb-6 flex items-center gap-3 text-ouro">
+              <span aria-hidden="true" className="h-px w-10 bg-current opacity-60" />
+              {HERO.eyebrow}
+            </span>
             {HERO.titleLines.map((line, i) => (
               <span key={line} className="linha-revelar">
                 <span style={{ animationDelay: `${i * LINE_DELAY_MS}ms` }}>

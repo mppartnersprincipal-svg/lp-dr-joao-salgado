@@ -28,7 +28,7 @@ export const SITE = {
   name: 'Dr. João Salgado',
   title: 'Facetas de Porcelana em Goiânia | Dr. João Salgado',
   description:
-    'Facetas de porcelana em Goiânia com o Dr. João Salgado (CRO-GO 6835), mais de 25 anos de odontologia. Sorriso natural, planejado para você. Agende sua avaliação pelo WhatsApp.',
+    'Facetas de porcelana e lentes de contato dental em Goiânia com o Dr. João Salgado (CRO-GO 6835), +25 anos de odontologia. Agende sua avaliação pelo WhatsApp.',
   locale: 'pt_BR',
 } as const;
 
@@ -135,12 +135,13 @@ export const IMAGEM_ILUSTRATIVA = 'Imagem ilustrativa';
 // ---------------------------------------------------------------------------
 
 export const HERO = {
-  eyebrow: 'Facetas de porcelana · Goiânia',
+  // Entra DENTRO do h1 (Hero.tsx): palavra-chave principal + cidade, sem mudar o visual
+  eyebrow: 'Facetas de porcelana · Lentes de contato dental · Goiânia',
   titleLines: ['Um sorriso natural,', 'elegante e feito', 'para você.'],
   subtitle:
-    'Há mais de 25 anos, o Dr. João Salgado planeja cada sorriso a partir de quem você é: tom de pele, traços do rosto e a sua identidade. Sem exagero e sem aquele branco artificial.',
+    'Há mais de 25 anos, o cirurgião-dentista Dr. João Salgado planeja cada sorriso a partir de quem você é: tom de pele, traços do rosto e a sua identidade. Facetas de porcelana sem exagero e sem aquele branco artificial.',
   secondaryCta: 'Ver como funciona',
-  badges: [DOCTOR.cro, '+25 anos de odontologia'],
+  badges: [DOCTOR.cro, '+25 anos de odontologia', 'Atendimento em Goiânia'],
   // Cartões flutuantes sobre o retrato
   floating: [
     { icon: 'fingerprint', title: 'Planejamento sob medida', text: 'para o seu rosto' },
@@ -166,15 +167,16 @@ export const IDENTIFICACAO = {
     { icon: 'camera', text: 'Você evita sorrir nas fotos ou disfarça o sorriso com a mão.' },
     { icon: 'smile', text: 'A cor, o tamanho ou o formato dos dentes incomodam quando você se olha no espelho.' },
     { icon: 'droplets', text: 'Já fez facetas de resina que mancharam ou perderam o brilho com o tempo.' },
-    { icon: 'sparkles', text: 'Tem receio de ficar com um sorriso artificial, que não combina com você.' },
+    { icon: 'sparkles', text: 'Tem receio de ficar com um sorriso artificial, aquele "dente de porcelana" que todo mundo nota.' },
   ],
 } as const;
 
 export const FACETAS = {
   eyebrow: 'O tratamento',
   title: 'Facetas de porcelana: beleza que acompanha a sua rotina',
+  // Definição direta (SEO/GEO): o que é faceta de porcelana e por que "lente de contato dental" é a mesma família
   intro:
-    'Lâminas finas de porcelana que corrigem cor, formato, tamanho e pequenas desarmonias dos dentes. A indicação para o seu caso é definida na avaliação.',
+    'Facetas de porcelana, também chamadas de lentes de contato dental quando são ultrafinas, são lâminas de cerâmica aplicadas sobre os dentes da frente para corrigir cor, formato, tamanho e pequenas desarmonias. A indicação para o seu caso, e a espessura de cada lâmina, é definida na avaliação.',
   // Faceta 3D interativa (components/ui/Faceta3D.tsx); sem WebGL, mostra a foto SERVICOS.facetas
   modelo3d: {
     tag: 'Modelo ilustrativo',
@@ -189,7 +191,7 @@ export const FACETAS = {
     {
       icon: 'palette',
       title: 'Cor mais estável no dia a dia',
-      text: 'A porcelana é menos suscetível a manchas por pigmentos de alimentos e bebidas. Com os cuidados e o acompanhamento indicados, a cor tende a se manter por mais tempo.',
+      text: 'A porcelana é menos suscetível a manchas por pigmentos de alimentos e bebidas do que a resina. Com os cuidados e o acompanhamento indicados, a cor tende a se manter por mais tempo.',
     },
     {
       icon: 'gem',
@@ -260,7 +262,7 @@ export function quizMessage(incomodos: readonly string[], quando: string): strin
 // TODO(validar com o Dr. João): etapas e textos do processo clínico
 export const COMO_FUNCIONA = {
   eyebrow: 'Passo a passo',
-  title: 'Como funciona o seu tratamento',
+  title: 'Como funciona o tratamento com facetas de porcelana',
   steps: [
     {
       icon: 'message',
@@ -284,7 +286,7 @@ export const COMO_FUNCIONA = {
       icon: 'hand',
       image: 'laboratorio',
       title: 'Confecção e instalação',
-      text: 'As facetas são confeccionadas e instaladas com precisão, com atenção a cada detalhe.',
+      text: 'As facetas de porcelana são confeccionadas sob medida e instaladas com precisão, com atenção a cada detalhe.',
     },
     {
       icon: 'heartHandshake',
@@ -296,7 +298,7 @@ export const COMO_FUNCIONA = {
 } as const;
 
 export const SOBRE = {
-  eyebrow: 'Quem cuida do seu sorriso',
+  eyebrow: 'Cirurgião-dentista em Goiânia',
   title: 'Eu sou o Dr. João Salgado.',
   // Legenda fixada no Instagram (primeira pessoa, palavras do próprio Dr.)
   paragraphs: [
@@ -308,6 +310,7 @@ export const SOBRE = {
     `${DOCTOR.profession} · ${DOCTOR.cro}`,
     'Fundador da rede ISOdonto Clínica',
     'Fundador da Allstima Odontologia',
+    'Facetas de porcelana, implantes e ortodontia em Goiânia, GO',
   ],
 } as const;
 
@@ -351,7 +354,7 @@ interface Tratamento {
 
 export const TRATAMENTOS: { eyebrow: string; title: string; items: readonly Tratamento[] } = {
   eyebrow: 'Outros tratamentos',
-  title: 'Cuidado completo para o seu sorriso',
+  title: 'Além das facetas: cuidado completo para o seu sorriso',
   items: [
     {
       id: 'implantes',
@@ -378,7 +381,7 @@ export const TRATAMENTOS: { eyebrow: string; title: string; items: readonly Trat
 
 // Fotos reais do Dr. João (as imagens geradas por IA NÃO entram aqui: esta galeria mostra o consultório de verdade)
 export const CONSULTORIO = {
-  eyebrow: 'Por dentro do consultório',
+  eyebrow: 'Por dentro do consultório, em Goiânia',
   title: 'Um ambiente pensado para você se sentir à vontade',
   hint: 'Arraste para o lado',
   photos: [
@@ -392,7 +395,7 @@ export const CONSULTORIO = {
 
 // TODO(validar com o Dr. João): respostas do FAQ
 export const FAQ = {
-  eyebrow: 'Dúvidas frequentes',
+  eyebrow: 'Dúvidas sobre facetas e lentes de contato dental',
   title: 'Antes de agendar, você pode estar se perguntando',
   items: [
     {
@@ -402,6 +405,16 @@ export const FAQ = {
     {
       q: 'Quanto tempo duram as facetas de porcelana?',
       a: 'A durabilidade varia de pessoa para pessoa e depende de cuidados como higiene, consultas de acompanhamento e hábitos (por exemplo, ranger os dentes). Por isso o acompanhamento faz parte do tratamento.',
+    },
+    {
+      // TODO(validar com o Dr. João): definição de lente de contato dental
+      q: 'Qual a diferença entre faceta de porcelana e lente de contato dental?',
+      a: 'As duas são lâminas de cerâmica coladas sobre a face visível do dente. "Lente de contato dental" é o nome popular das facetas de porcelana mais finas, que costumam exigir pouco ou nenhum desgaste do dente. Qual das duas se aplica ao seu caso é definido na avaliação, a partir do que você quer corrigir.',
+    },
+    {
+      // TODO(validar com o Dr. João): comparação resina x porcelana (a LP não oferece resina; só orienta)
+      q: 'Faceta de resina ou de porcelana?',
+      a: 'A resina é aplicada diretamente no dente e tende a manchar e perder o brilho com o tempo. A faceta de porcelana é confeccionada sob medida em laboratório e é menos suscetível a manchas. A indicação depende do seu caso e é conversada na avaliação com o Dr. João.',
     },
     {
       q: 'Vou precisar abrir mão do café ou do vinho?',
@@ -416,12 +429,12 @@ export const FAQ = {
       a: 'Sim. Cuidar do sorriso não é vaidade: é coerência com a forma como você se apresenta. O planejamento respeita traços e expressão masculinos para um resultado natural.',
     },
     {
-      q: 'Como é feito o orçamento?',
-      a: 'O orçamento é individual: ele é apresentado na consulta de avaliação, depois de entender o seu caso.',
+      q: 'Quanto custam as facetas de porcelana?',
+      a: 'O orçamento é individual e depende do seu caso, como a quantidade de dentes e o planejamento necessário. Ele é apresentado na consulta de avaliação, depois de entender o que você quer mudar.',
     },
     {
-      q: 'Como faço para agendar a avaliação?',
-      a: 'Pelo WhatsApp. É só tocar em qualquer botão desta página e a equipe do Dr. João responde para combinar o melhor horário.',
+      q: 'Como agendar uma avaliação para facetas em Goiânia?',
+      a: 'Pelo WhatsApp. É só tocar em qualquer botão desta página e a equipe do Dr. João responde para combinar o melhor horário no consultório, em Goiânia.',
     },
   ],
 } as const;
@@ -429,7 +442,7 @@ export const FAQ = {
 export const CTA_FINAL = {
   eyebrow: 'Agende sua avaliação',
   title: 'Seu novo sorriso começa com uma conversa.',
-  text: 'Conte o que te incomoda e entenda, com calma, o que pode ser feito pelo seu sorriso.',
+  text: 'Conte o que te incomoda e entenda, com calma, o que facetas de porcelana ou lentes de contato dental podem fazer pelo seu sorriso.',
   checklist: ['Conversa sem pressa', 'Planejamento individual', 'Acompanhamento depois do tratamento'],
 } as const;
 
