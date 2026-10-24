@@ -19,8 +19,9 @@ export function isAuthorized(request: Request): boolean {
   return verifyToken(h.startsWith('Bearer ') ? h.slice(7) : '');
 }
 
-export function json(body: unknown, status = 200): Response {
-  return Response.json(body, { status, headers: NO_STORE });
+/** `headers` soma cabeçalhos às respostas sem cache (ex.: Retry-After). */
+export function json(body: unknown, status = 200, headers: Record<string, string> = {}): Response {
+  return Response.json(body, { status, headers: { ...NO_STORE, ...headers } });
 }
 
 export function empty(status = 204): Response {
