@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { CONTACT, DOCTOR } from '@/config/content';
+import { CONTACT, DOCTOR, enderecoCompleto, whatsappLinkWithText } from '@/config/content';
 
 export const metadata: Metadata = {
   title: `Política de privacidade | ${DOCTOR.name}`,
@@ -9,7 +9,16 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-// TODO(PREENCHER): razão social/CNPJ do controlador e e-mail de contato do encarregado (LGPD)
+// Controlador = o Dr. João, pessoa física (sem CNPJ). O CPF NÃO vai para a página pública: nome + CRO + endereço
+// já identificam o controlador e evitam exposição a fraude. O canal do titular é o próprio Dr. João (WhatsApp/Instagram).
+const MENSAGEM_PRIVACIDADE = 'Olá, Dr. João! Tenho uma solicitação sobre os meus dados pessoais e o site.';
+
+/** 5562999675077 → (62) 99967-5077 */
+function telefoneLegivel(digitos: string): string {
+  const local = digitos.replace(/^55/, '');
+  return `(${local.slice(0, 2)}) ${local.slice(2, -4)}-${local.slice(-4)}`;
+}
+
 export default function Privacidade() {
   return (
     <main className="container-lp max-w-3xl py-24 md:py-32">
@@ -22,8 +31,9 @@ export default function Privacidade() {
         <section>
           <h2>Quem somos</h2>
           <p className="mt-3">
-            Esta página é do {DOCTOR.name}, {DOCTOR.profession.toLowerCase()} ({DOCTOR.cro}), em {CONTACT.address.city}/
-            {CONTACT.address.state}.
+            Esta página é do {DOCTOR.name}, {DOCTOR.profession.toLowerCase()} ({DOCTOR.cro}), que atende na clínica em{' '}
+            {enderecoCompleto()}. Como pessoa física, o {DOCTOR.name} é o controlador dos dados tratados nesta página,
+            nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018).
           </p>
         </section>
 
@@ -50,8 +60,25 @@ export default function Privacidade() {
         <section>
           <h2>Seus direitos</h2>
           <p className="mt-3">
-            Você pode mudar sua escolha a qualquer momento limpando os dados do site no seu navegador. Para dúvidas
-            sobre privacidade, fale conosco pelo Instagram{' '}
+            Você pode mudar sua escolha de cookies a qualquer momento limpando os dados do site no seu navegador. Você
+            também pode pedir confirmação, acesso, correção ou exclusão dos seus dados, e tirar dúvidas sobre privacidade.
+          </p>
+        </section>
+
+        <section>
+          <h2>Canal de contato</h2>
+          <p className="mt-3">
+            As solicitações sobre dados pessoais são atendidas pelo próprio {DOCTOR.name}, pelo WhatsApp{' '}
+            {/* sem data-cta: não é clique de agendamento e não deve contar como conversão */}
+            <a
+              href={whatsappLinkWithText(MENSAGEM_PRIVACIDADE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ouro underline underline-offset-4"
+            >
+              {telefoneLegivel(CONTACT.whatsapp)}
+            </a>{' '}
+            ou pelo Instagram{' '}
             <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="text-ouro underline underline-offset-4">
               {CONTACT.instagramHandle}
             </a>

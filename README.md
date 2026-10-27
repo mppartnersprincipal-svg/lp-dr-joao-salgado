@@ -9,9 +9,8 @@ npm run dev
 ```
 
 ## Pendências antes de publicar
-O `npm run build` lista o que falta (`scripts/check-placeholders.mjs`). Hoje:
-- Razão social/CNPJ e e-mail de contato na política de privacidade (`app/privacidade/page.tsx`). Responsável técnico (o próprio Dr. João) e telefone (só WhatsApp) já definidos. Endereço, horário e Maps já seguem o Perfil da Empresa "ALLSTIMA" (27/10/2026)
-- Confirmar o CRO-GO 6835 (tirado da bio do Instagram) e validar a copy com o Dr. João (FAQ e etapas do tratamento)
+O `npm run build` lista os dados marcados como pendentes (`scripts/check-placeholders.mjs`); em 27/10/2026 não há nenhum. Dados já definidos: endereço, horário e Maps (Perfil da Empresa "ALLSTIMA"), responsável técnico (o próprio Dr. João), sem telefone fixo (só WhatsApp) e controlador LGPD = o Dr. João, pessoa física (o CPF não vai para a página). Ainda em aberto:
+- Confirmar o CRO-GO 6835 (tirado da bio do Instagram). A copy (FAQ, etapas, resina, investimento) foi validada pelo Dr. João em 27/10/2026
 - Meta Pixel (quando houver campanha no Meta; configurar no GTM)
 - Monograma/logo em vetor oficial (hoje recriado em SVG)
 - Antes e depois: só com autorização escrita dos pacientes (`FLAGS.casos`)

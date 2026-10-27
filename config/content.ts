@@ -249,7 +249,7 @@ export const FACETAS = {
   ],
 } as const;
 
-// TODO(validar com o Dr. João): textos de facetas de resina e da comparação.
+// Textos de facetas de resina e da comparação: validados pelo Dr. João em 27/10/2026.
 // Atende os grupos "Facetas de Resina" (URL final /#facetas-de-resina) e "Resina ou Porcelana"
 // (/#resina-ou-porcelana) da campanha. As duas aparecem como opções válidas: nada de falar contra a resina.
 export const RESINA = {
@@ -341,7 +341,7 @@ export function quizMessage(incomodos: readonly string[], quando: string): strin
     .join('\n');
 }
 
-// TODO(validar com o Dr. João): etapas e textos do processo clínico
+// Etapas do processo clínico: validadas pelo Dr. João em 27/10/2026.
 export const COMO_FUNCIONA = {
   eyebrow: 'Passo a passo',
   title: 'Como funciona o tratamento com facetas de porcelana',
@@ -379,7 +379,7 @@ export const COMO_FUNCIONA = {
   ],
 } as const;
 
-// TODO(validar com o Dr. João): fatores do orçamento. NUNCA citar valor, faixa, parcelamento ou desconto (regra do CRO).
+// Fatores do orçamento (validados pelo Dr. João em 27/10/2026). NUNCA citar valor, faixa, parcelamento ou desconto (regra do CRO).
 // Atende o grupo "Preço e Valor" da campanha (URL final /#investimento): quem busca preço encontra uma resposta honesta.
 export const INVESTIMENTO = {
   eyebrow: 'Preço das facetas de porcelana e de resina',
@@ -531,7 +531,7 @@ export const CONSULTORIO = {
   ],
 } as const;
 
-// TODO(validar com o Dr. João): respostas do FAQ
+// Respostas do FAQ: validadas pelo Dr. João em 27/10/2026.
 export const FAQ = {
   eyebrow: 'Dúvidas sobre facetas de porcelana, resina e lentes',
   title: 'Antes de agendar, você pode estar se perguntando',
@@ -545,12 +545,10 @@ export const FAQ = {
       a: 'A durabilidade varia de pessoa para pessoa e depende de cuidados como higiene, consultas de acompanhamento e hábitos (por exemplo, ranger os dentes). Por isso o acompanhamento faz parte do tratamento.',
     },
     {
-      // TODO(validar com o Dr. João): definição de lente de contato dental
       q: 'Qual a diferença entre faceta de porcelana e lente de contato dental?',
       a: 'As duas são lâminas de cerâmica coladas sobre a face visível do dente. "Lente de contato dental" é o nome popular das facetas de porcelana mais finas, que costumam exigir pouco ou nenhum desgaste do dente. Qual das duas se aplica ao seu caso é definido na avaliação, a partir do que você quer corrigir.',
     },
     {
-      // TODO(validar com o Dr. João): comparação resina x porcelana
       q: 'Faceta de resina ou de porcelana?',
       a: 'As duas corrigem cor e formato. A faceta de resina é esculpida diretamente no dente, no consultório, e costuma pedir pouco ou nenhum desgaste. A de porcelana é confeccionada sob medida em laboratório e é pouco suscetível a manchas. O Dr. João faz as duas, e a indicação para o seu caso é definida na avaliação.',
     },
