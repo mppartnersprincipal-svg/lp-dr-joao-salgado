@@ -10,15 +10,17 @@ npm run dev
 
 ## Pendências antes de publicar
 O `npm run build` lista o que falta (`scripts/check-placeholders.mjs`). Hoje:
-- WhatsApp comercial, endereço, horário, link do Maps, responsável técnico (`config/content.ts`)
+- Razão social/CNPJ e e-mail de contato na política de privacidade (`app/privacidade/page.tsx`). Responsável técnico (o próprio Dr. João) e telefone (só WhatsApp) já definidos. Endereço, horário e Maps já seguem o Perfil da Empresa "ALLSTIMA" (27/10/2026)
 - Confirmar o CRO-GO 6835 (tirado da bio do Instagram) e validar a copy com o Dr. João (FAQ e etapas do tratamento)
 - Meta Pixel (quando houver campanha no Meta; configurar no GTM)
 - Monograma/logo em vetor oficial (hoje recriado em SVG)
 - Antes e depois: só com autorização escrita dos pacientes (`FLAGS.casos`)
+- Avaliações do Google: exibição aprovada pelo Dr. João (`FLAGS.avaliacoes` ligado); falta copiar as avaliações reais em `AVALIACOES_GOOGLE`
+- Fotos reais do consultório (cadeira, scanner, escala de cor, sala): ainda só há retratos; as ilustrações das facetas, escala e outros tratamentos seguem com a etiqueta "Imagem ilustrativa"
 
 ## Rastreamento
 
-Tudo via **GTM** (`NEXT_PUBLIC_GTM_ID`), com Consent Mode v2: tudo `denied` até o visitante aceitar o banner. GA4, conversões do Google Ads e Meta Pixel ficam configurados no GTM. **Nunca** colocar gtag/pixel direto no código.
+Tudo via **GTM** (`NEXT_PUBLIC_GTM_ID`), com Consent Mode v2 no modelo opt-out (desde 27/10/2026): tudo `granted` desde a entrada e `denied` só para quem escolher "Só o essencial" no banner (escolha salva em `js-consent`). Antes era opt-in e as conversões de quem não clicava no banner não chegavam ao Google Ads. GA4, conversões do Google Ads e Meta Pixel ficam configurados no GTM. **Nunca** colocar gtag/pixel direto no código.
 
 | Evento (dataLayer) | Quando | Parâmetros |
 |---|---|---|
@@ -34,9 +36,9 @@ Tudo via **GTM** (`NEXT_PUBLIC_GTM_ID`), com Consent Mode v2: tudo `denied` até
 
 Todos os eventos levam `utm_source/medium/campaign/term/content` da URL de entrada (guardados na sessão). A mensagem do WhatsApp ganha `(ref: origem / mídia / campanha)` quando a visita veio de campanha.
 
-**cta_id** (todos únicos): `cta_whatsapp_header`, `cta_whatsapp_hero`, `cta_whatsapp_facetas`, `cta_whatsapp_como_funciona`, `cta_whatsapp_sobre`, `cta_whatsapp_implantes`, `cta_whatsapp_ortodontia`, `cta_whatsapp_faq`, `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp` (desktop), `cta_whatsapp_sticky` (barra fixa no celular), `cta_whatsapp_quiz` (envio da pré-avaliação).
+**cta_id** (todos únicos): `cta_whatsapp_header`, `cta_whatsapp_hero`, `cta_whatsapp_facetas`, `cta_whatsapp_como_funciona`, `cta_whatsapp_sobre`, `cta_whatsapp_implantes`, `cta_whatsapp_ortodontia`, `cta_whatsapp_faq`, `cta_whatsapp_resina`, `cta_whatsapp_investimento`, `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp` (desktop), `cta_whatsapp_sticky` (barra fixa no celular), `cta_whatsapp_quiz` (envio da pré-avaliação).
 
-**URLs finais por serviço** (grupos de anúncio): `/#facetas`, `/#implantes`, `/#ortodontia`.
+**URLs finais por serviço** (grupos de anúncio): `/#facetas`, `/#implantes`, `/#ortodontia`. Para o Índice de Qualidade da campanha de facetas: grupo **Resina** → `/#facetas-de-resina`; grupo **Comparação** → `/#resina-ou-porcelana`; grupo **Preço** → `/#investimento` (o Google avalia a página inteira; a âncora só leva o visitante direto ao trecho que responde a busca).
 
 ### IDs (padrão em `TRACKING`, `config/content.ts`)
 | | |

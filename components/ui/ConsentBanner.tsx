@@ -28,7 +28,8 @@ export function ConsentBanner() {
       className="fixed inset-x-3 bottom-24 z-50 mx-auto max-w-xl border border-ouro/25 bg-superficie/95 p-5 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] md:bottom-6 md:left-6 md:right-auto"
     >
       <p className="text-sm leading-relaxed text-areia">
-        Usamos cookies para entender como a página é usada e melhorar a sua experiência. Saiba mais na{' '}
+        Usamos cookies para entender como a página é usada e medir os nossos anúncios. Se preferir, clique em
+        &quot;Só o essencial&quot; para desligá-los. Saiba mais na{' '}
         <Link href="/privacidade" className="text-ouro underline underline-offset-4 hover:text-ouro-claro">
           política de privacidade
         </Link>

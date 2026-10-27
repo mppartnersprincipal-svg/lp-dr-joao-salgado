@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Jost } from 'next/font/google';
-import { CONTACT, DOCTOR, FAQ, SITE, isFilled } from '@/config/content';
+import { AVALIACOES_GOOGLE, CONTACT, DOCTOR, FAQ, HORARIOS_SCHEMA, NOME_PERFIL_GOOGLE, SITE, isFilled } from '@/config/content';
 import { TrackingProvider } from '@/components/tracking/TrackingProvider';
 import { Interactions } from '@/components/ui/Interactions';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
@@ -51,20 +51,27 @@ function jsonLd() {
     '@type': 'Dentist',
     '@id': `${SITE.url}/#clinica`,
     name: `${DOCTOR.name} | Facetas de Porcelana`,
+    alternateName: NOME_PERFIL_GOOGLE,
     url: SITE.url,
     image: `${SITE.url}/opengraph-image.jpg`,
     description: SITE.description,
     ...(isFilled(CONTACT.whatsapp) && { telephone: `+${CONTACT.whatsapp}` }),
     address: {
       '@type': 'PostalAddress',
-      ...(isFilled(address.street) && { streetAddress: address.street }),
+      // PostalAddress não tem campo de bairro: no Brasil ele entra no streetAddress ("Rua X, 123, Setor Y")
+      ...(isFilled(address.street) && {
+        streetAddress: [address.street, isFilled(address.neighborhood) ? address.neighborhood : ''].filter(Boolean).join(', '),
+      }),
       ...(isFilled(address.postalCode) && { postalCode: address.postalCode }),
       addressLocality: address.city,
       addressRegion: address.state,
       addressCountry: 'BR',
     },
+    ...(CONTACT.mapsUrl ? { hasMap: CONTACT.mapsUrl } : {}),
+    openingHoursSpecification: HORARIOS_SCHEMA.map((h) => ({ '@type': 'OpeningHoursSpecification', ...h })),
+    // Sem aggregateRating: avaliação "autoatribuída" no site do próprio negócio não vale para o Google
     areaServed: { '@type': 'City', name: 'Goiânia' },
-    sameAs: [CONTACT.instagram],
+    sameAs: [CONTACT.instagram, ...(AVALIACOES_GOOGLE.url ? [AVALIACOES_GOOGLE.url] : [])],
     employee: {
       '@type': 'Person',
       name: DOCTOR.name,
@@ -77,6 +84,11 @@ function jsonLd() {
         '@type': 'MedicalProcedure',
         name: 'Facetas de porcelana',
         alternateName: ['Lentes de contato dental', 'Facetas dentárias', 'Laminados cerâmicos', 'Porcelana nos dentes'],
+      },
+      {
+        '@type': 'MedicalProcedure',
+        name: 'Facetas de resina',
+        alternateName: ['Lentes de resina', 'Facetas de resina composta', 'Lente de contato dental de resina'],
       },
       { '@type': 'MedicalProcedure', name: 'Implantes dentários' },
       { '@type': 'MedicalProcedure', name: 'Aparelhos ortodônticos' },

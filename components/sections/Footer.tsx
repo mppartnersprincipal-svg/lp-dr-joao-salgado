@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { CONTACT, DOCTOR, FOOTER, isFilled } from '@/config/content';
+import { CONTACT, DOCTOR, FOOTER, LOCAL, enderecoCompleto, isFilled } from '@/config/content';
 import { Monograma } from '@/components/ui/Monograma';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export function Footer() {
+  const endereco = enderecoCompleto();
   return (
     <footer className="footer cv-auto border-t border-ouro/15 bg-fundo pb-28 pt-14 md:pb-14">
       <div className="container-lp grid gap-10 md:grid-cols-12">
@@ -17,6 +18,22 @@ export function Footer() {
             {isFilled(DOCTOR.technicalResponsible) && (
               <p className="mt-1 text-sm text-areia">Responsável técnico: {DOCTOR.technicalResponsible}</p>
             )}
+            {/* NAP (nome, endereço, contato) igual ao do Perfil da Empresa no Google */}
+            <address className="mt-4 text-sm not-italic leading-relaxed text-areia">
+              {endereco || `${LOCAL} · ${CONTACT.address.state}`}
+              {isFilled(CONTACT.hours) && <span className="block">{CONTACT.hours}</span>}
+              {CONTACT.mapsUrl && (
+                <a
+                  href={CONTACT.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="click_maps"
+                  className="mt-1 block text-ouro underline underline-offset-4 hover:text-ouro-claro"
+                >
+                  Como chegar
+                </a>
+              )}
+            </address>
           </div>
         </div>
 

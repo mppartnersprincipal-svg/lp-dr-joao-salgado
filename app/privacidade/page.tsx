@@ -40,9 +40,10 @@ export default function Privacidade() {
           <h2>Cookies e ferramentas</h2>
           <p className="mt-3">
             Usamos o Google Tag Manager, o Google Analytics e ferramentas de mensuração de anúncios (Google Ads e
-            Meta) para entender como a página é usada e medir o resultado das campanhas. Esses cookies só são
-            ativados se você clicar em &quot;Aceitar&quot; no aviso de cookies. Com &quot;Só o essencial&quot;, a
-            página continua funcionando e apenas estatísticas anônimas e agregadas são registradas.
+            Meta) para entender como a página é usada e medir o resultado das campanhas. Esses cookies ficam ativos
+            desde a sua entrada na página. Se você clicar em &quot;Só o essencial&quot; no aviso de cookies, eles são
+            desligados e a escolha fica salva neste navegador; a página continua funcionando e apenas estatísticas
+            anônimas e agregadas são registradas.
           </p>
         </section>
 

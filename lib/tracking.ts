@@ -10,6 +10,8 @@
  * Cliques e FAQ também vão para o coletor do /dashboard (public/js/tracker.js → window.jsCollect).
  */
 
+import { TEMA_FACETAS } from '@/config/content';
+
 export const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'] as const;
 export const SCROLL_MARKS = [25, 50, 75, 100] as const;
 export const CONSENT_KEY = 'js-consent'; // mesma chave lida por public/js/tracker.js
@@ -109,18 +111,32 @@ export function withUtmReference(href: string): string {
   const parts = [utms.utm_source, utms.utm_medium, utms.utm_campaign]
     .map((v) => (v || '').replace(/[^\p{L}\p{N} _.\-]/gu, '').slice(0, 40))
     .filter(Boolean);
-  if (!parts.length) return href;
+  const isResina = isResinaVisit(utms);
+  if (!parts.length && !isResina) return href;
   try {
     const url = new URL(href);
-    const text = url.searchParams.get('text') || '';
-    url.searchParams.set('text', `${text}\n\n(ref: ${parts.join(' / ')})`);
+    const original = url.searchParams.get('text') || '';
+    // O clique reescreve o href: não acrescentar a referência de novo num segundo clique
+    if (original.includes('\n\n(ref: ')) return href;
+    const text = isResina ? original.replace(TEMA_FACETAS.porcelana, TEMA_FACETAS.resina) : original;
+    url.searchParams.set('text', parts.length ? `${text}\n\n(ref: ${parts.join(' / ')})` : text);
     return url.toString();
   } catch {
     return href;
   }
 }
 
-/** Consent Mode v2: atualiza a decisão do visitante (o padrão "denied" é definido antes do GTM). */
+/**
+ * Quem chegou por anúncio de resina (grupo "resina" da campanha, ou termo com "resina" sem "porcelana")
+ * recebe a mensagem de facetas de resina em qualquer botão de facetas, inclusive no quiz.
+ */
+function isResinaVisit(utms: Utms): boolean {
+  if (utms.utm_content === 'resina') return true;
+  const term = (utms.utm_term || '').toLowerCase();
+  return term.includes('resina') && !term.includes('porcelana');
+}
+
+/** Consent Mode v2: atualiza a decisão do visitante (o padrão "granted" é definido antes do GTM). */
 export function updateConsent(choice: ConsentChoice): void {
   const granted = choice === 'accepted' ? 'granted' : 'denied';
   // O GTM só reconhece comandos de consentimento no formato `arguments` (igual ao gtag)

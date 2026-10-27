@@ -25,6 +25,7 @@ import {
   ShieldCheck,
   Smile,
   Sparkles,
+  Star,
   Stethoscope,
   type LucideIcon,
 } from 'lucide-react';
@@ -57,6 +58,7 @@ const ICONS: Record<IconKey, LucideIcon> = {
   shield: ShieldCheck,
   smile: Smile,
   sparkles: Sparkles,
+  star: Star,
   stethoscope: Stethoscope,
 };
 

@@ -14,19 +14,21 @@ import alinhador from '@/assets/servicos/alinhador.webp';
 import escala from '@/assets/servicos/escala-cor.webp';
 import facetas from '@/assets/servicos/facetas.webp';
 import implante from '@/assets/servicos/implante.webp';
-import laboratorio from '@/assets/servicos/laboratorio.webp';
-import planejamento from '@/assets/servicos/planejamento-digital.webp';
 
 export const FOTOS = { clinica, clinicaSorrindo, consultorio, lupa, recepcao, retrato, xadrez, xadrezSorrindo } as const;
 
-export const SERVICOS = { alinhador, escala, facetas, implante, laboratorio, planejamento } as const;
+export const SERVICOS = { alinhador, escala, facetas, implante } as const;
 
-/** Imagem de cada etapa do "Como funciona" (consultório e acompanhamento = fotos reais). */
+/**
+ * Imagem de cada etapa do "Como funciona": todas fotos reais do Dr. João (out/2026).
+ * As ilustrações de planejamento, escala de cor e laboratório saíram daqui: o Google Ads pesa foto real
+ * na experiência da página. Quando houver fotos do consultório (cadeira, scanner, escala), trocar aqui.
+ */
 export const ETAPAS = {
-  consultorio: { src: consultorio, alt: 'Dr. João Salgado no consultório', ilustrativa: false },
-  planejamento: { src: planejamento, alt: 'Planejamento digital do sorriso em um monitor de consultório', ilustrativa: true },
-  escala: { src: escala, alt: 'Escala de cor com tons naturais de porcelana', ilustrativa: true },
-  laboratorio: { src: laboratorio, alt: 'Ceramista aplicando porcelana em uma faceta', ilustrativa: true },
+  consultorio: { src: consultorio, alt: 'Dr. João Salgado conversando no consultório, com o notebook à frente', ilustrativa: false },
+  planejamento: { src: xadrez, alt: 'Dr. João Salgado concentrado em uma jogada de xadrez', ilustrativa: false },
+  recepcao: { src: recepcao, alt: 'Dr. João Salgado na recepção da clínica Allstima, em Goiânia', ilustrativa: false },
+  lupa: { src: lupa, alt: 'Dr. João Salgado com as lupas de aumento usadas nos procedimentos', ilustrativa: false },
   acompanhamento: { src: clinicaSorrindo, alt: 'Dr. João Salgado sorrindo na clínica', ilustrativa: false },
 } as const;
 

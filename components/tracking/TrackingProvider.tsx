@@ -11,14 +11,15 @@ interface TrackingProviderProps {
 
 const GTM_ID = validGtmId(process.env.NEXT_PUBLIC_GTM_ID || TRACKING.gtmId);
 
-// Consent Mode v2 (LGPD): tudo "denied" até o visitante aceitar no banner; quem já aceitou antes
-// entra como "granted". Depois disso o GTM carrega. Script inline porque precisa rodar ANTES do gtm.js.
+// Consent Mode v2 (LGPD, modelo opt-out): "granted" desde a entrada, para nenhuma conversão do
+// Google Ads se perder antes do clique no banner; quem escolheu "Só o essencial" (agora ou antes)
+// fica "denied". Depois disso o GTM carrega. Script inline porque precisa rodar ANTES do gtm.js.
 function gtmBootstrap(gtmId: string): string {
   return `
 window.dataLayer=window.dataLayer||[];
 function gtag(){dataLayer.push(arguments);}
 var c=null;try{c=localStorage.getItem('${CONSENT_KEY}')}catch(e){}
-var g=c==='accepted'?'granted':'denied';
+var g=c==='essential'?'denied':'granted';
 gtag('consent','default',{analytics_storage:g,ad_storage:g,ad_user_data:g,ad_personalization:g,wait_for_update:500});
 dataLayer.push({page_type:location.pathname==='/'?'home':'outra'});
 dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});

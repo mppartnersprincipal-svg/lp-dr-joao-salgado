@@ -10,7 +10,7 @@ Contexto completo do cliente (regras do CRO, estratégia, público): `C:\Users\U
 |---|---|
 | Cliente | Dr. João Salgado, cirurgião-dentista (CRO-GO 6835, conforme a bio do Instagram; confirmar) |
 | Segmento | Odontologia estética, público A/B de Goiânia |
-| Objetivo | Leads de **facetas de porcelana** via WhatsApp (tráfego pago Google + Meta) |
+| Objetivo | Leads de **facetas de porcelana** (e de resina, que o Dr. também faz) via WhatsApp (tráfego pago Google + Meta) |
 | CTA | "Agendar minha avaliação" → WhatsApp |
 | WhatsApp | 5562999675077 (`CONTACT.whatsapp` em `config/content.ts`) |
 | URL | https://www.doutorjoaosalgado.com.br (padrão em `config/content.ts`; o sem www redireciona) |
@@ -50,7 +50,7 @@ assets/fotos/            ← WebP gerados por `npm run images` a partir de Fotos
 - **Performance (out/2026):** as animações NÃO usam mais react-spring. `Reveal`, `SpotlightCard`, `TiltCard`, `ParallaxImage` e `CountUp` são componentes de servidor com atributos `data-*`; um único `components/ui/Interactions.tsx` (montado no layout) liga tudo por delegação, e a animação é CSS (`[data-reveal]` → `.is-visible` em `globals.css`). Lenis só no desktop (`pointer: fine`), carregado em `requestIdleCallback`. Seções abaixo da dobra têm `.cv-auto` (`content-visibility`, só < 1024px; não usar nas seções fixadas). Resultado no A/B intercalado (Lighthouse celular, mediana de 5): nota 55 → 86, TBT 1068 → 212 ms, JS 3,0 → 0,8 s. **Não reintroduzir um componente cliente por card/bloco.**
 
 ## Seções (ids = funil do /dashboard)
-`topo` · `credenciais` · `identificacao` · `facetas` · `avaliacao` (quiz) · `como-funciona` · `sobre` · `consultorio` (galeria) · `diferenciais` · `tratamentos` (cards `#implantes`, `#ortodontia`) · `faq` · `contato`. Se mudar a ordem, atualizar `SECTIONS.home` em `server/analytics/report.mjs` e `SECTION` em `public/dashboard/app.js`.
+`topo` · `credenciais` · `identificacao` · `facetas` · `facetas-de-resina` (com a tabela `#resina-ou-porcelana`) · `avaliacao` (quiz) · `como-funciona` · `investimento` (preço, sem valores) · `sobre` · `consultorio` (galeria) · `diferenciais` · `avaliacoes` (Google, atrás de `FLAGS.avaliacoes`) · `tratamentos` (cards `#implantes`, `#ortodontia`) · `faq` · `contato`. Se mudar a ordem, atualizar `SECTIONS.home` em `server/analytics/report.mjs` e `SECTION` em `public/dashboard/app.js`.
 
 ## Comandos
 ```bash

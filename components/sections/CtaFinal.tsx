@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Check } from 'lucide-react';
-import { CONTACT, CTA_FINAL, isFilled } from '@/config/content';
+import { CONTACT, CTA_FINAL, LOCAL, isFilled } from '@/config/content';
 import { FOTOS } from '@/lib/images';
 import { Reveal } from '@/components/ui/Reveal';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
@@ -56,11 +56,11 @@ export function CtaFinal() {
               <dd className="mt-2 text-areia">
                 {hasAddress ? (
                   <>
-                    {address.street}, {address.neighborhood}
+                    {address.street}
                     <br />
                   </>
                 ) : null}
-                {address.city} · {address.state}
+                {LOCAL} · {address.state}
                 {CONTACT.mapsUrl && (
                   <a
                     href={CONTACT.mapsUrl}
