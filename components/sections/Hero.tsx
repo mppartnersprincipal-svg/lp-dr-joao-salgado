@@ -84,6 +84,16 @@ export function Hero() {
 
           <div className="surgir mt-9 flex flex-col gap-4 sm:flex-row sm:items-center" style={{ animationDelay: '560ms' }}>
             <WhatsAppButton ctaId="cta_whatsapp_hero" size="lg" className="brilho" />
+            {/* Para quem chegou pesquisando preço: leva à #investimento (rolagem, não é clique de WhatsApp) */}
+            <a
+              href="#investimento"
+              data-track="click_cta"
+              data-cta-id="hero_valor"
+              className="group inline-flex min-h-12 items-center gap-3 px-2 text-[0.75rem] uppercase tracking-[0.2em] text-ouro-claro underline decoration-ouro/40 underline-offset-8 transition-colors hover:text-marfim"
+            >
+              {HERO.valorCta}
+              <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" aria-hidden="true" />
+            </a>
             <a
               href="#como-funciona"
               data-track="click_cta"

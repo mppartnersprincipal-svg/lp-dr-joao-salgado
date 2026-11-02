@@ -126,7 +126,10 @@ export type WhatsAppCtaId =
   | 'cta_whatsapp_ortodontia'
   | 'cta_whatsapp_faq'
   | 'cta_whatsapp_resina'
-  | 'cta_whatsapp_investimento'
+  | 'resina_valor'
+  | 'comparacao_valor'
+  | 'investimento_valor'
+  | 'investimento_foto'
   | 'cta_whatsapp_avaliacoes'
   | 'cta_whatsapp_final'
   | 'cta_whatsapp_footer'
@@ -141,7 +144,7 @@ export type IconKey =
   | 'heartHandshake' | 'eye' | 'ear' | 'microscope' | 'shapes' | 'ruler' | 'moveHorizontal'
   | 'eraser' | 'clock' | 'calendar' | 'layers' | 'stethoscope' | 'star';
 
-export type WhatsAppTopic = 'facetas' | 'resina' | 'implantes' | 'ortodontia';
+export type WhatsAppTopic = 'facetas' | 'resina' | 'implantes' | 'ortodontia' | 'valor' | 'valorResina' | 'foto';
 
 /** Tema das mensagens de facetas; lib/tracking.ts troca porcelana por resina para quem veio de anúncio de resina. */
 export const TEMA_FACETAS = { porcelana: 'facetas de porcelana', resina: 'facetas de resina' } as const;
@@ -151,6 +154,10 @@ const WHATSAPP_MESSAGES: Record<WhatsAppTopic, string> = {
   resina: `Olá, Dr. João! Vim pelo site e gostaria de agendar uma avaliação para ${TEMA_FACETAS.resina}.`,
   implantes: 'Olá, Dr. João! Vim pelo site e gostaria de agendar uma avaliação para implantes dentários.',
   ortodontia: 'Olá, Dr. João! Vim pelo site e gostaria de agendar uma avaliação para aparelho ortodôntico.',
+  // Para quem só quer saber o valor: a condição é passada NA CONVERSA, nunca na página (regra do CRO)
+  valor: 'Olá, Dr. João! Vim pelo site e quero saber o valor das facetas.',
+  valorResina: `Olá, Dr. João! Vim pelo site e quero saber o valor das ${TEMA_FACETAS.resina}.`,
+  foto: 'Olá, Dr. João! Vim pelo site e quero enviar uma foto do meu sorriso para uma pré-avaliação de facetas.',
 };
 
 export function whatsappLink(topic: WhatsAppTopic = 'facetas'): string {
@@ -178,6 +185,7 @@ export const HERO = {
   subtitle:
     'Há mais de 25 anos, o cirurgião-dentista Dr. João Salgado planeja cada sorriso a partir de quem você é: tom de pele, traços do rosto e a sua identidade. Facetas de porcelana e de resina sem exagero e sem aquele branco artificial.',
   secondaryCta: 'Ver como funciona',
+  valorCta: 'Saber o valor das facetas',
   badges: [DOCTOR.cro, '+25 anos de odontologia', `Atendimento em ${LOCAL}`],
   // Cartões flutuantes sobre o retrato
   floating: [
@@ -264,6 +272,7 @@ export const RESINA = {
     { icon: 'palette', title: 'Cor planejada com você', text: 'A tonalidade é escolhida para combinar com o seu rosto, sem aquele branco artificial.' },
   ],
   cta: 'Agendar avaliação para resina',
+  ctaValor: 'Saber o valor pelo WhatsApp',
   comparacao: {
     title: 'Resina ou porcelana: qual é a indicada para você?',
     colunas: { criterio: 'O que comparar', resina: 'Faceta de resina', porcelana: 'Faceta de porcelana' },
@@ -379,13 +388,18 @@ export const COMO_FUNCIONA = {
   ],
 } as const;
 
-// Fatores do orçamento (validados pelo Dr. João em 27/10/2026). NUNCA citar valor, faixa, parcelamento ou desconto (regra do CRO).
-// Atende o grupo "Preço e Valor" da campanha (URL final /#investimento): quem busca preço encontra uma resposta honesta.
+// Fatores do valor (validados pelo Dr. João em 27/10/2026). NUNCA citar valor, faixa, parcelamento ou desconto (regra do CRO).
+// Atende o grupo "Preço e Valor" da campanha (URL final /#investimento): quem busca preço pede o valor pelo WhatsApp
+// sem precisar agendar; a condição da clínica é informada só na conversa.
 export const INVESTIMENTO = {
   eyebrow: 'Preço das facetas de porcelana e de resina',
-  title: 'Quanto custam as facetas? Depende do seu sorriso.',
+  title: 'Quanto custam as facetas?',
   intro:
-    'O valor das facetas, de porcelana ou de resina, não é tabelado, porque cada sorriso pede um planejamento diferente. O orçamento é individual e apresentado na consulta de avaliação, depois do exame. Estes são os pontos que definem o investimento no seu caso:',
+    'O valor depende de quantos dentes você quer tratar e do material, resina ou porcelana. O Dr. João passa o valor das facetas pelo WhatsApp, sem compromisso de agendar.',
+  ctaValor: 'Quero saber o valor pelo WhatsApp',
+  ctaFoto: 'Enviar foto do sorriso para pré-avaliação',
+  dicaFoto: 'Mande uma foto sorrindo, de frente, com boa luz.',
+  fatoresTitulo: 'O que muda o valor no seu caso',
   fatores: [
     { icon: 'smile', title: 'Quantidade de dentes', text: 'Corrigir um ou dois dentes é diferente de planejar o sorriso inteiro.' },
     { icon: 'layers', title: 'Material e espessura', text: 'Porcelana, resina ou lente de contato dental: o material e a espessura dependem do que precisa ser corrigido.' },
@@ -395,8 +409,7 @@ export const INVESTIMENTO = {
     { icon: 'heartHandshake', title: 'Acompanhamento', text: 'O pós-atendimento faz parte do tratamento.' },
   ],
   porque:
-    'Por que não divulgamos valores: as regras de publicidade odontológica não permitem anunciar preço de tratamento, e um número dado sem exame não diria nada sobre o seu caso.',
-  cta: 'Quero meu orçamento na avaliação',
+    'Por que o valor não aparece nesta página: as regras de publicidade odontológica não permitem divulgar valores de tratamento em sites e anúncios. Pelo WhatsApp, o Dr. João explica o valor considerando o que você quer mudar.',
 } as const;
 
 export const SOBRE = {
@@ -566,11 +579,11 @@ export const FAQ = {
     },
     {
       q: 'Quanto custam as facetas de porcelana e de resina?',
-      a: 'O orçamento é individual e depende do seu caso, como a quantidade de dentes e o planejamento necessário. Ele é apresentado na consulta de avaliação, depois de entender o que você quer mudar.',
+      a: 'O valor depende de quantos dentes você quer tratar e do material, resina ou porcelana. O Dr. João passa o valor das facetas pelo WhatsApp, sem compromisso de agendar. Se quiser, mande uma foto do sorriso para uma pré-avaliação.',
     },
     {
       q: 'Como agendar uma avaliação para facetas em Goiânia?',
-      a: `Pelo WhatsApp. É só tocar em qualquer botão desta página e a equipe do Dr. João responde para combinar o melhor horário no consultório, em ${LOCAL}.${
+      a: `Pelo WhatsApp. É só tocar em qualquer botão desta página e a equipe do Dr. João responde para combinar um horário no consultório, em ${LOCAL}.${
         enderecoCompleto() ? ` Endereço: ${enderecoCompleto()}.` : ''
       }`,
     },

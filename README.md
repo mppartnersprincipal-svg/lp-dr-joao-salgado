@@ -24,7 +24,7 @@ Tudo via **GTM** (`NEXT_PUBLIC_GTM_ID`), com Consent Mode v2 no modelo opt-out (
 | Evento (dataLayer) | Quando | Parâmetros |
 |---|---|---|
 | `click_whatsapp` | clique em qualquer botão de WhatsApp | `cta_id` + UTMs |
-| `click_cta` | "Ver como funciona" (hero) | `cta_id=cta_ver_como_funciona` |
+| `click_cta` | "Ver como funciona" e "Saber o valor das facetas" (hero, rola até #investimento) | `cta_id=cta_ver_como_funciona` / `hero_valor` |
 | `click_instagram` / `click_maps` / `click_phone` | links do rodapé/contato | — |
 | `faq_open` | pergunta do FAQ aberta | `faq_question` |
 | `scroll_25/50/75/100` | profundidade de rolagem (1x por página) | `percent_scrolled` |
@@ -35,7 +35,7 @@ Tudo via **GTM** (`NEXT_PUBLIC_GTM_ID`), com Consent Mode v2 no modelo opt-out (
 
 Todos os eventos levam `utm_source/medium/campaign/term/content` da URL de entrada (guardados na sessão). A mensagem do WhatsApp ganha `(ref: origem / mídia / campanha)` quando a visita veio de campanha.
 
-**cta_id** (todos únicos): `cta_whatsapp_header`, `cta_whatsapp_hero`, `cta_whatsapp_facetas`, `cta_whatsapp_como_funciona`, `cta_whatsapp_sobre`, `cta_whatsapp_implantes`, `cta_whatsapp_ortodontia`, `cta_whatsapp_faq`, `cta_whatsapp_resina`, `cta_whatsapp_investimento`, `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp` (desktop), `cta_whatsapp_sticky` (barra fixa no celular), `cta_whatsapp_quiz` (envio da pré-avaliação).
+**cta_id** (todos únicos): `cta_whatsapp_header`, `cta_whatsapp_hero`, `cta_whatsapp_facetas`, `cta_whatsapp_como_funciona`, `cta_whatsapp_sobre`, `cta_whatsapp_implantes`, `cta_whatsapp_ortodontia`, `cta_whatsapp_faq`, `cta_whatsapp_resina`, `resina_valor` (valor das facetas de resina), `comparacao_valor` (fim da tabela resina ou porcelana), `investimento_valor` (valor pelo WhatsApp), `investimento_foto` (foto do sorriso para pré-avaliação), `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp` (desktop), `cta_whatsapp_sticky` (barra fixa no celular), `cta_whatsapp_quiz` (envio da pré-avaliação).
 
 **URLs finais por serviço** (grupos de anúncio): `/#facetas`, `/#implantes`, `/#ortodontia`. Para o Índice de Qualidade da campanha de facetas: grupo **Resina** → `/#facetas-de-resina`; grupo **Comparação** → `/#resina-ou-porcelana`; grupo **Preço** → `/#investimento` (o Google avalia a página inteira; a âncora só leva o visitante direto ao trecho que responde a busca).
 

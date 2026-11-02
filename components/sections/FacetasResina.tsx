@@ -6,6 +6,7 @@ import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 const STAGGER_MS = 90;
+const BOTAO_CELULAR = 'w-full py-3 text-center sm:w-auto';
 const { colunas, linhas } = RESINA.comparacao;
 
 /**
@@ -36,8 +37,15 @@ export function FacetasResina() {
           ))}
         </ul>
 
-        <Reveal className="mt-10">
-          <WhatsAppButton ctaId="cta_whatsapp_resina" topic="resina" label={RESINA.cta} />
+        <Reveal className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+          <WhatsAppButton ctaId="cta_whatsapp_resina" topic="resina" label={RESINA.cta} className={BOTAO_CELULAR} />
+          <WhatsAppButton
+            ctaId="resina_valor"
+            topic="valorResina"
+            label={RESINA.ctaValor}
+            variant="contorno-escuro"
+            className={BOTAO_CELULAR}
+          />
         </Reveal>
 
         <div id="resina-ou-porcelana" className="mt-24 scroll-mt-28">
@@ -83,6 +91,10 @@ export function FacetasResina() {
 
           <Reveal className="mt-10">
             <p className="max-w-2xl leading-relaxed text-tinta/80">{RESINA.comparacao.nota}</p>
+          </Reveal>
+
+          <Reveal className="mt-8">
+            <WhatsAppButton ctaId="comparacao_valor" topic="valor" label={RESINA.ctaValor} className={BOTAO_CELULAR} />
           </Reveal>
         </div>
       </div>
