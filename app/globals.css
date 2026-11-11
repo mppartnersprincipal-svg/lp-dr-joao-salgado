@@ -54,7 +54,16 @@ body {
   color: var(--cor-texto);
   font-family: var(--font-sans);
   font-weight: 400;
-  text-rendering: optimizeLegibility;
+  /* sem text-rendering: optimizeLegibility: o Chrome já aplica kerning e a opção deixa o layout mais lento no celular */
+}
+
+/* Variantes do hero por intenção da busca do anúncio (lib/intencao.ts marca <html data-intencao>).
+   Sem atributo, só o padrão aparece. */
+html:not([data-intencao="preco"]) .intencao-preco,
+html:not([data-intencao="comparacao"]) .intencao-comparacao,
+html:not([data-intencao="resina"]) .intencao-resina,
+html[data-intencao] .intencao-padrao {
+  display: none !important;
 }
 
 ::selection {

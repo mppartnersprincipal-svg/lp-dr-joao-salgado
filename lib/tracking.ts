@@ -118,7 +118,11 @@ export function withUtmReference(href: string): string {
     const original = url.searchParams.get('text') || '';
     // O clique reescreve o href: não acrescentar a referência de novo num segundo clique
     if (original.includes('\n\n(ref: ')) return href;
-    const text = isResina ? original.replace(TEMA_FACETAS.porcelana, TEMA_FACETAS.resina) : original;
+    // Resina: "facetas de porcelana" vira "facetas de resina", e o pedido de valor genérico
+    // ("o valor das facetas.", botões de preço) vira "o valor das facetas de resina."
+    const text = isResina
+      ? original.replace(TEMA_FACETAS.porcelana, TEMA_FACETAS.resina).replace('valor das facetas.', `valor das ${TEMA_FACETAS.resina}.`)
+      : original;
     url.searchParams.set('text', parts.length ? `${text}\n\n(ref: ${parts.join(' / ')})` : text);
     return url.toString();
   } catch {

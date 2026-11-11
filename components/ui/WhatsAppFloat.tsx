@@ -1,11 +1,14 @@
-import { whatsappLink } from '@/config/content';
+import { HERO_INTENCOES, whatsappLink, type HeroIntencao, type Intencao } from '@/config/content';
 import { WhatsAppButton } from './WhatsAppButton';
 import { WhatsAppIcon } from './WhatsAppIcon';
+
+const INTENCOES = Object.entries(HERO_INTENCOES) as [Intencao, HeroIntencao][];
 
 /**
  * Atalhos fixos para o WhatsApp:
  * - desktop: botão flutuante redondo (fab_whatsapp)
- * - celular: barra fixa no rodapé da tela (cta_whatsapp_sticky)
+ * - celular: barra fixa no rodapé da tela (cta_whatsapp_sticky). O rótulo e a mensagem seguem a
+ *   intenção da busca (quem buscou preço vê "Quero saber o valor"), com o mesmo cta_id em todas.
  */
 export function WhatsAppFloat() {
   return (
@@ -22,7 +25,17 @@ export function WhatsAppFloat() {
       </a>
 
       <div className="sticky-cta fixed inset-x-0 bottom-0 z-40 border-t border-ouro/20 bg-fundo/95 px-4 py-3 md:hidden">
-        <WhatsAppButton ctaId="cta_whatsapp_sticky" size="md" className="w-full" />
+        <WhatsAppButton ctaId="cta_whatsapp_sticky" size="md" className="intencao-padrao w-full" />
+        {INTENCOES.map(([key, v]) => (
+          <WhatsAppButton
+            key={key}
+            ctaId="cta_whatsapp_sticky"
+            topic={v.cta.topic}
+            label={v.cta.label}
+            size="md"
+            className={`intencao-${key} w-full`}
+          />
+        ))}
       </div>
     </>
   );

@@ -61,7 +61,8 @@ export function ComoFunciona() {
       ref={sectionRef}
       id="como-funciona"
       aria-labelledby="como-funciona-t"
-      className="relative bg-superficie"
+      // cv-auto só vale < 1024px, onde a seção NÃO é fixada (lista simples)
+      className="cv-auto relative bg-superficie"
       style={isPinned ? { height: `${TOTAL * VH_PER_STEP + 100}vh` } : undefined}
     >
       {isPinned ? <PinnedLayout active={active} /> : <ListLayout />}

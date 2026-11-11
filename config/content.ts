@@ -119,6 +119,9 @@ export const FLAGS = {
 export type WhatsAppCtaId =
   | 'cta_whatsapp_header'
   | 'cta_whatsapp_hero'
+  | 'cta_whatsapp_hero_valor'
+  | 'cta_whatsapp_hero_comparacao'
+  | 'cta_whatsapp_hero_resina'
   | 'cta_whatsapp_facetas'
   | 'cta_whatsapp_como_funciona'
   | 'cta_whatsapp_sobre'
@@ -144,7 +147,15 @@ export type IconKey =
   | 'heartHandshake' | 'eye' | 'ear' | 'microscope' | 'shapes' | 'ruler' | 'moveHorizontal'
   | 'eraser' | 'clock' | 'calendar' | 'layers' | 'stethoscope' | 'star';
 
-export type WhatsAppTopic = 'facetas' | 'resina' | 'implantes' | 'ortodontia' | 'valor' | 'valorResina' | 'foto';
+export type WhatsAppTopic =
+  | 'facetas'
+  | 'resina'
+  | 'implantes'
+  | 'ortodontia'
+  | 'valor'
+  | 'valorResina'
+  | 'foto'
+  | 'comparacao';
 
 /** Tema das mensagens de facetas; lib/tracking.ts troca porcelana por resina para quem veio de anúncio de resina. */
 export const TEMA_FACETAS = { porcelana: 'facetas de porcelana', resina: 'facetas de resina' } as const;
@@ -158,6 +169,7 @@ const WHATSAPP_MESSAGES: Record<WhatsAppTopic, string> = {
   valor: 'Olá, Dr. João! Vim pelo site e quero saber o valor das facetas.',
   valorResina: `Olá, Dr. João! Vim pelo site e quero saber o valor das ${TEMA_FACETAS.resina}.`,
   foto: 'Olá, Dr. João! Vim pelo site e quero enviar uma foto do meu sorriso para uma pré-avaliação de facetas.',
+  comparacao: 'Olá, Dr. João! Vim pelo site e quero saber se a faceta de resina ou a de porcelana é a indicada para mim.',
 };
 
 export function whatsappLink(topic: WhatsAppTopic = 'facetas'): string {
@@ -193,6 +205,46 @@ export const HERO = {
     { icon: 'shield', title: DOCTOR.cro, text: 'cirurgião-dentista' },
   ],
 } as const;
+
+/**
+ * Topo da página conforme a intenção da busca do anúncio (message match). O script de
+ * lib/intencao.ts marca <html data-intencao="..."> antes da primeira pintura, a partir de
+ * utm_content (grupo da campanha) ou utm_term; o CSS mostra só a variante certa.
+ * Sem intenção (orgânico, direto, outros grupos), vale o HERO padrão. Nada de preço: regra do CFO.
+ */
+export type Intencao = 'preco' | 'comparacao' | 'resina';
+
+export interface HeroIntencao {
+  titleLines: readonly string[];
+  subtitle: string;
+  cta: { ctaId: WhatsAppCtaId; topic: WhatsAppTopic; label: string };
+  link: { href: string; ctaId: string; label: string };
+}
+
+export const HERO_INTENCOES: Record<Intencao, HeroIntencao> = {
+  preco: {
+    titleLines: ['O valor das suas', 'facetas, direto', 'pelo WhatsApp.'],
+    // mesma explicação validada da seção #investimento
+    subtitle:
+      'O valor depende de quantos dentes você quer tratar e do material, resina ou porcelana. O Dr. João passa o valor das facetas pelo WhatsApp, sem compromisso de agendar.',
+    cta: { ctaId: 'cta_whatsapp_hero_valor', topic: 'valor', label: 'Quero saber o valor' },
+    link: { href: '#investimento', ctaId: 'hero_valor', label: 'O que muda o valor' },
+  },
+  comparacao: {
+    titleLines: ['Resina ou porcelana?', 'A faceta indicada', 'para o seu sorriso.'],
+    subtitle:
+      'As duas são boas opções. A escolha depende dos seus dentes, do que você quer mudar e da sua rotina, e é feita junto com o Dr. João na avaliação.',
+    cta: { ctaId: 'cta_whatsapp_hero_comparacao', topic: 'comparacao', label: 'Qual é a indicada?' },
+    link: { href: '#resina-ou-porcelana', ctaId: 'hero_comparacao', label: 'Comparar resina e porcelana' },
+  },
+  resina: {
+    titleLines: ['Facetas de resina', 'esculpidas no', 'consultório.'],
+    subtitle:
+      'Na faceta de resina, o Dr. João esculpe a resina camada por camada sobre o dente, com a cor escolhida para combinar com o seu sorriso. Costuma pedir pouco ou nenhum desgaste; a indicação é definida na avaliação.',
+    cta: { ctaId: 'cta_whatsapp_hero_resina', topic: 'resina', label: 'Agendar avaliação para resina' },
+    link: { href: '#investimento', ctaId: 'hero_valor', label: 'Saber o valor das facetas' },
+  },
+};
 
 export const MARQUEE = ['Naturalidade', 'Planejamento', 'Porcelana', 'Precisão', 'Acolhimento', 'Pós-atendimento'] as const;
 

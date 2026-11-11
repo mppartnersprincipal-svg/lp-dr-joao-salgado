@@ -47,7 +47,8 @@ export function Consultorio() {
       ref={sectionRef}
       id="consultorio"
       aria-labelledby="consultorio-t"
-      className="relative bg-fundo"
+      // cv-auto só vale < 1024px, onde a seção vira carrossel (a fixação é só no desktop)
+      className="cv-auto relative bg-fundo"
       style={isPinned ? { height: `calc(100vh + ${distance}px)` } : undefined}
     >
       <div className={isPinned ? 'sticky top-0 flex h-screen flex-col justify-center overflow-hidden' : 'secao'}>

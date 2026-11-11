@@ -4,6 +4,7 @@ import { AVALIACOES_GOOGLE, CONTACT, DOCTOR, FAQ, HORARIOS_SCHEMA, NOME_PERFIL_G
 import { TrackingProvider } from '@/components/tracking/TrackingProvider';
 import { Interactions } from '@/components/ui/Interactions';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
+import { INTENCAO_SCRIPT } from '@/lib/intencao';
 import './globals.css';
 
 // next/font baixa as fontes no build e serve do próprio domínio (sem requisição ao Google em produção)
@@ -111,8 +112,11 @@ function jsonLd() {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${jost.variable} antialiased`}>
+    // suppressHydrationWarning: o script de intenção põe data-intencao no <html> antes de o React hidratar
+    <html lang="pt-BR" className={`${cormorant.variable} ${jost.variable} antialiased`} suppressHydrationWarning>
       <body className="min-h-dvh">
+        {/* precisa rodar antes de o hero ser pintado: escolhe a variante do topo pela busca do anúncio */}
+        <script dangerouslySetInnerHTML={{ __html: INTENCAO_SCRIPT }} />
         {/* sem JS, os blocos com animação de entrada aparecem direto */}
         <noscript>
           <style>{'[data-reveal]{opacity:1!important;transform:none!important}'}</style>
